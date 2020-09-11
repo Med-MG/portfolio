@@ -465,3 +465,224 @@ $(function() {
     }
   });
 
+// reinit
+document.addEventListener("swup:contentReplaced", function() {
+
+    Scrollbar.use(OverscrollPlugin);
+    Scrollbar.init(document.querySelector('#scrollbar'), {
+      damping: 0.05,
+      renderByPixel: true,
+      continuousScrolling: true,
+    });
+    Scrollbar.init(document.querySelector('#scrollbar2'), {
+      damping: 0.05,
+      renderByPixel: true,
+      continuousScrolling: true,
+    });
+
+    $("#form").submit(function() {
+      $.ajax({
+        type: "POST",
+        url: "mail.php",
+        data: $(this).serialize()
+      }).done(function() {
+
+        var tl = anime.timeline({
+          easing: 'easeOutExpo',
+        });
+
+        tl
+          .add({
+            targets: '.art-submit',
+            opacity: 0,
+            scale: .5,
+          })
+          .add({
+            targets: '.art-success',
+            scale: 1,
+            height: '45px',
+          })
+      });
+      return false;
+    });
+
+    // Masonry Grid
+    $('.art-grid').isotope({
+      filter: '*',
+      itemSelector: '.art-grid-item',
+      transitionDuration: '.6s',
+    });
+
+    $('.art-filter a').on('click', function() {
+      $('.art-filter .art-current').removeClass('art-current');
+      $(this).addClass('art-current');
+
+      var selector = $(this).data('filter');
+      $('.art-grid').isotope({
+        filter: selector
+      });
+      return false;
+    });
+
+    anime({
+      targets: '.art-counter-frame',
+      opacity: [0, 1],
+      duration: 800,
+      delay: 300,
+      easing: 'linear',
+    });
+
+    $('.art-counter').each(function() {
+      $(this).prop('Counter', 0).animate({
+        Counter: $(this).text()
+      }, {
+        duration: 2000,
+        easing: 'linear',
+        step: function(now) {
+          $(this).text(Math.ceil(now));
+        }
+      });
+    });
+
+    // slider testimonials
+    var swiper = new Swiper('.art-testimonial-slider', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      speed: 1400,
+      autoplay: false,
+      autoplaySpeed: 5000,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.art-testi-swiper-next',
+        prevEl: '.art-testi-swiper-prev',
+      },
+      breakpoints: {
+        1500: {
+          slidesPerView: 2,
+        },
+        1200: {
+          slidesPerView: 2,
+        },
+        992: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 1,
+        }
+      },
+    });
+
+    // slider works
+    var swiper = new Swiper('.art-works-slider', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      speed: 1400,
+      autoplay: {
+        delay: 4000,
+      },
+      autoplaySpeed: 5000,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.art-works-swiper-next',
+        prevEl: '.art-works-swiper-prev',
+      },
+      breakpoints: {
+        1500: {
+          slidesPerView: 2,
+        },
+        1200: {
+          slidesPerView: 2,
+        },
+        992: {
+          slidesPerView: 1,
+        },
+      },
+    });
+
+    // slider blog
+    var swiper = new Swiper('.art-blog-slider', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      speed: 1400,
+      autoplay: {
+        delay: 4000,
+      },
+      autoplaySpeed: 5000,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.art-blog-swiper-next',
+        prevEl: '.art-blog-swiper-prev',
+      },
+      breakpoints: {
+        1500: {
+          slidesPerView: 3,
+        },
+        1200: {
+          slidesPerView: 3,
+        },
+        992: {
+          slidesPerView: 1,
+        },
+      },
+    });
+
+    $('[data-fancybox="gallery"]').fancybox({
+      animationEffect: "zoom-in-out",
+      animationDuration: 600,
+      transitionDuration: 1200,
+      buttons: [
+        "zoom",
+        "slideShow",
+        "thumbs",
+        "close"
+      ],
+    });
+
+    $('[data-fancybox="diplome"]').fancybox({
+      animationEffect: "zoom-in-out",
+      animationDuration: 600,
+      transitionDuration: 1200,
+      buttons: [
+        "zoom",
+        "slideShow",
+        "thumbs",
+        "close",
+      ],
+    });
+
+    $('[data-fancybox="recommendation"]').fancybox({
+      animationEffect: "zoom-in-out",
+      animationDuration: 600,
+      transitionDuration: 1200,
+      buttons: [
+        "zoom",
+        "slideShow",
+        "thumbs",
+        "close",
+      ],
+    });
+
+    $.fancybox.defaults.hash = false;
+
+    $('.current-menu-item a').clone().prependTo('.art-current-page');
+
+    $('.menu-item').on('click', function() {
+      if ($(this).hasClass('menu-item-has-children')) {
+        $(this).children('.sub-menu').toggleClass('art-active');
+      } else {
+        $('.art-menu-bar-btn , .art-menu-bar , .art-info-bar , .art-content , .art-menu-bar-btn , .art-info-bar-btn').removeClass('art-active , art-disabled');
+      }
+    });
+
+  })
+
+});
