@@ -1,0 +1,73 @@
+/* ------------------------------
+
+portfolio
+
+------------------------------ */
+/* ----- filter ----- */
+.art-filter {
+    & a {
+      color: $text-color-2;
+      margin-bottom: 0;
+  
+      &.art-current {
+        color: $text-color-1;
+      }
+    }
+  }
+  /* ----- portfolio items ----- */
+  .art-portfolio-item-frame {
+    display: block;
+    width: 100%;
+    outline: inherit;
+    overflow: hidden;
+    box-shadow: $shadow-1;
+    position: relative;
+    padding-bottom: 60%;
+  
+    & img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(85%) blur(0);
+      transition: $tr-md;
+    }
+  
+    & .art-item-hover {
+      width: 27px;
+      height: 27px;
+      box-shadow: $shadow-2;
+      border-radius: 50%;
+      position: absolute;
+      color: $text-color-1;
+      top: 30px;
+      left: 30px;
+      background: $card-color-s-light;
+      font-size: 11px;
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: $tr-md;
+    }
+  
+    &:hover {
+      & .art-item-hover {
+        opacity: 0.5;
+  
+        &:hover {
+          opacity: 1;
+          transform: scale(1.07);
+        }
+      }
+  
+      & img {
+        transform: scale(1.07);
+        filter: brightness(100%) blur(0);
+      }
+    }
+  }
+  
