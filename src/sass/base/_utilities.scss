@@ -1,0 +1,84 @@
+
+.u-center-text {
+    text-align: center !important;
+}
+
+//margin bottom utilities
+.u-mb-s {
+    margin-bottom: 1.5rem !important;
+}
+
+.u-mb-m {
+    margin-bottom: 4rem !important;
+}
+
+.u-mb-b {
+    margin-bottom: 8rem !important;
+}
+
+//margin top utilities
+.mt-4 {
+    margin-top: 4rem;
+}
+
+.u-mt-m {
+    margin-top: 5rem !important;
+}
+
+.u-mt-b {
+    margin-top: 5rem !important;
+}
+
+.u-mt-h {
+    margin-top: 10rem !important;
+}
+
+.u-mr-2 {
+    margin-right: 2rem;
+}
+
+//hidden utility
+.hidden {
+    display: none !important;
+}
+
+// styling utilities
+
+.text-muted {
+    color: #8492a6 !important;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.text-light {
+    color: #f8f9fc !important;
+}
+
+.rounded-top {
+    border-top-left-radius: 6px !important;
+    border-top-right-radius: 6px !important;
+}
+
+.d-block {
+    display: block !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+
+.d-mobile {
+    display: none !important;
+
+    @include responsive(tab-land) {
+        display: block !important;
+    }
+}
+
+.position-object-right{
+    object-position: right;
+}
