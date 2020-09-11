@@ -175,3 +175,25 @@ portfolio
       }
     }
   }
+  /* ----- single project ----- */
+.art-project-cover {
+    position: relative;
+    overflow: hidden;
+    box-shadow: $shadow-1;
+    margin-bottom: 30px;
+  
+    & .art-portfolio-item-frame {
+      padding-bottom: 50%;
+    }
+  }
+  
+  .art-project-category {
+    color: $text-color-3;
+    margin-left: auto;
+    display: inline;
+    background: $info-bar-1-color;
+    padding: 5px 15px;
+    border-radius: 15px;
+    box-shadow: inset $shadow-1;
+    font-size: 10px;
+  }
