@@ -191,4 +191,50 @@ menu bar
         }
       }
     }
+      /* ----- language change  ----- */
+  & .art-language-change {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: $shadow-2;
+    background: $info-bar-2-color-light;
+    padding: 30px 26px;
+    margin: 0;
+
+    & li {
+      list-style-type: none;
+      box-shadow: inset $shadow-1;
+      background: $content-color;
+      font-size: 10px;
+      border-radius: 50%;
+      height: 25px;
+      width: 25px;
+      margin-bottom: 10px;
+
+      & a {
+        text-transform: uppercase;
+        height: 100%;
+        width: 100%;
+        font-weight: 600;
+        display: block;
+        text-align: center;
+        line-height: 25px;
+        transition: $tr-md;
+      }
+
+      &.art-active-lang {
+        background-color: $main-color;
+        box-shadow: $shadow-1;
+
+        & a {
+          color: $content-color;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
