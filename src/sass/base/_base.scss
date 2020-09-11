@@ -45,4 +45,66 @@
       }
     }
   }
- 
+ /* ----- quote ----- */
+blockquote {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background: $main-color;
+    color: $deep-color;
+    padding: 30px;
+    padding-left: 35px;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 14px;
+    box-shadow: $shadow-2;
+    position: relative;
+  
+    &:before {
+      position: absolute;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f10d";
+      font-size: 18px;
+      opacity: .5;
+      top:5px;
+      left: 9px;
+      color: $text-color-1;
+    }
+  
+    &:after {
+      position: absolute;
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f10d";
+      font-size: 18px;
+      opacity: .5;
+      bottom:5px;
+      right: 9px;
+      color: $text-color-1;
+      transform: rotate(180deg);
+    }
+  }
+  /* ----- list ----- */
+  .art-custom-list {
+    padding-left: 25px;
+  
+    & li {
+      position: relative;
+      list-style-type: none;
+      color: $text-color-1;
+      margin-bottom: 5px;
+  
+      &:before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: -25px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: solid 2px $main-color;
+        background: transparent;
+        box-shadow: $shadow-1;
+      }
+    }
+  }
