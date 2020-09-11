@@ -1,0 +1,132 @@
+/* -------------------------------------------
+
+Name: 	MedMg
+Version:  1.0
+Author:		Mohamed Mouiguina 
+Portfolio:  mohamedmouiguina.com
+
+p.s. I am available for Freelance hire (UI design, web development). mail: mouiguina.mohammed@gmail.com
+
+
+------------------------------------------- */
+
+/*--------------------------------------------
+I.  Abstract
+
+    1. Variables
+        - colors
+        - shodows
+        - linear gradients
+    2. mixins
+        - Media query manager
+    3. Media-queries
+
+II. Base Folder
+
+    1. Typography
+        - fonts
+        - text defaults
+        - title defaults
+        - text config
+        - subtitle
+    2.  Base
+        - container
+        - image defaults
+        - link defaults
+        - table
+        - quote
+        - list
+    3.  Utilities
+        - divider
+        - space
+        - link
+    4. transitions
+        - in animation
+        - out animation
+III. Component
+
+    1.  buttons
+        - buttons frame
+        - burger button
+IV. Layout
+
+    1. info bar
+      - header
+      - name
+      - language skills
+      - hard skills
+      - knowledge
+      - info bar links
+      - social links
+      - progresbar color
+    2. menu bar
+      - main menu
+      - language change
+      - current page title
+    3. app markup
+        - top background
+        - preloader
+        - scroll frame
+        - app
+        - mobile top bar
+        - info bar
+        - content
+        - menu bar
+        - markup media queries
+    4 footer
+V.  Content
+
+    1. content
+        - section title
+        - card
+        - banner
+        - typing code
+        - counters
+        - services
+        - price
+        - testimonials
+        - timeline
+        - contact form
+        - blog
+        - pagination
+        - brands
+        
+    2. portfolio
+        - filter
+        - portfolio items
+        - touch device querie
+        - single project
+        - fancybox customization
+
+
+
+
+--------------------------------------------*/
+//abstracts
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+//base
+@import "base/transitions";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
+
+//Components
+@import "components/buttons";
+
+//Layouts
+@import "layouts/app-markup";
+@import "layouts/info-bar";
+@import "layouts/menu-bar";
+@import "layouts/footer";
+
+
+//Content
+@import "content/content";
+@import "content/portfolio";
+
+
+//abstracts
+@import "abstracts/media-queries";
+
