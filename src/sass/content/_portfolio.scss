@@ -197,3 +197,101 @@ portfolio
     box-shadow: inset $shadow-1;
     font-size: 10px;
   }
+  /* ----- fancybox customization ----- */
+.fancybox-container {
+    margin: 15px;
+    width: calc(100vw - 30px);
+    height: calc(100vh - 30px);
+  
+    & .fancybox-bg {
+      background: $info-bar-1-color-light;
+    }
+  }
+  
+  .fancybox-is-open .fancybox-bg {
+    opacity: 1;
+  }
+  
+  .fancybox-toolbar {
+    background: $card-color-s-light;
+    display: flex;
+    width: calc(100vw - 30px);
+    justify-content: flex-end;
+    align-items: center;
+    height: 70px;
+    box-shadow: $shadow-1;
+    z-index: 999999;
+    padding: 0 17px;
+    transition: $tr-lg;
+  
+    & .fancybox-button {
+      background: transparent;
+      color: $text-color-2;
+  
+      &:hover {
+        color: $text-color-1;
+      }
+  
+      & svg {
+        width: 20px;
+      }
+    }
+  }
+  
+  .fancybox-slide--image {
+    padding: 130px 0 60px;
+  }
+  
+  .fancybox-navigation {
+    & .fancybox-button {
+      background-color: transparent;
+      margin: 0 15px;
+    }
+  }
+  
+  .fancybox-infobar {
+    top: 0;
+    left: 0;
+    font-size: 11px;
+    margin-left: 5px;
+    z-index: 9999999999999;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    color: $text-color-2;
+  }
+  
+  .fancybox-progress {
+    background: $main-color;
+    z-index: 999999999999999999;
+  }
+  
+  .fancybox-content {
+    & .fancybox-image {
+      box-shadow: $shadow-1;
+    }
+  }
+  
+  .fancybox-thumbs {
+    background: $card-color;
+    box-shadow: $shadow-1;
+  }
+  
+  .fancybox-thumbs__list a:before {
+    border-color: $main-color;
+    transition: $tr-md;
+  }
+  
+  .fancybox-button[disabled] {
+    transform: scale(0);
+    pointer-events: none;
+    transition: $tr-md;
+  }
+  
+  .art-recomendation-popup {
+    background-color: transparent;
+    max-width: 50%;
+  }
