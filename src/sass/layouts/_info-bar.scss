@@ -255,6 +255,60 @@ info bar
       }
     }
   }
+  /* ----- knowledge ----- */
+  & .art-knowledge-list {
+    padding-left: 0;
 
+    & li {
+      list-style-type: none;
+      margin-bottom: 5px;
+      color: $text-color-2;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &:before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f00c";
+        margin-right: 5px;
+        font-size: 9px;
+        color: $main-color;
+        margin-right: 10px;
+      }
+    }
+  }
+  /* ----- info bar links ----- */
+  & .art-links-frame {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  /* ----- social links ----- */
+  & .art-ls-social {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 35px;
+    height: 50px;
+    background: $info-bar-2-color-light;
+    position: absolute;
+    bottom: 0;
+    box-shadow: $shadow-2;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+
+    & a {
+      color: $text-color-2;
+      transition: $tr-sm;
+
+      &:hover {
+        text-shadow: $text-neon;
+        color: $text-color-1;
+      }
+    }
+  }
   }
   
