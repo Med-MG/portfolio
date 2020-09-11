@@ -1,0 +1,87 @@
+/* ----- blog ----- */
+.art-blog-card {
+    position: relative;
+    overflow: hidden;
+    box-shadow: $shadow-1;
+    margin-bottom: 30px;
+  
+    & .art-port-cover {
+      position: relative;
+      padding-bottom: 60%;
+      display: block;
+  
+      & img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: cover;
+        object-position: center;
+        transition: $tr-md;
+      }
+    }
+  
+    & .art-post-description {
+      background: $card-color;
+      padding: 30px;
+      position: relative;
+      bottom: 0;
+    }
+  
+    &:hover {
+      & .art-port-cover {
+        & img {
+          transform: scale(1.07);
+        }
+      }
+    }
+  }
+  
+  .art-blog-slider {
+    & .art-blog-card {
+      margin-bottom: 0;
+    }
+  }
+  /* ----- pagination ----- */
+  .art-pagination {
+    box-shadow: $shadow-1;
+    padding: 30px 30px 25px;
+    background: $card-color;
+    justify-content: space-between;
+    display: flex;
+  
+    & .art-pagination-center {
+      text-align: center;
+      position: absolute;
+      width: 200px;
+      left: 50%;
+      top: 25px;
+      margin-left: -100px;
+  
+      & a {
+        transition: $tr-md;
+        padding: 0 5px;
+  
+        &.art-active-pag {
+          color: $main-color;
+        }
+      }
+    }
+  
+    & .art-link {
+      margin: 0;
+    }
+  }
+  /* ----- brands ----- */
+  .art-brand {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 30px;
+    opacity: 0.6;
+    transition: $tr-md;
+  
+    &:hover {
+      opacity: 1;
+    }
+  }
