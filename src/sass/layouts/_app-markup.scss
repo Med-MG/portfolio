@@ -53,3 +53,19 @@ app markup
       }
     }
   }
+
+  .art-preloader-load {
+    & path {
+      &:first-child {
+        stroke: $deep-color;
+      }
+      &:last-child {
+        stroke: $main-color;
+      }
+    }
+  }
+  /* ----- scroll frame ----- */
+  .art-scroll-frame {
+    width: 100%;
+    height: calc(100vh - 30px);
+  }
