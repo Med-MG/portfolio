@@ -50,18 +50,23 @@ let stylePublic = () => {
         .pipe(browserSync.stream());
 }
 
-// let userref = () => {
-//     return gulp.src('./src/*.html')
-//         .pipe(fileinclude({
-//             prefix: '@@',
-//             basepath: '@file'
-//         }))
-//         .pipe(useref())
-//         .pipe(gulpIf('*.js', terser()))
-//         // 3. pass the file through css minifier
-//         // .pipe(gulpIf('*.css', cssnano()))
+let userref = () => {
+    return gulp.src('./src/*.html')
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
+        .pipe(useref())
+        .pipe(gulpIf('*.js', terser()))
+        // 3. pass the file through css minifier
+        // .pipe(gulpIf('*.css', cssnano()))
 
-//         .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'));
+}
+
+// let PHPrender = () => {
+//     return gulp.src('./src/*.php')
+//     .pipe(gulp.dest('dist'));
 // }
 
 let minifyjs = () => {
@@ -89,11 +94,12 @@ function watch() {
         }
     });
     gulp.watch('./src/sass/**/*.scss', style);
-    // gulp.watch('./src/sass/**/*.scss', userref);
-    // gulp.watch('./src/*.html', userref);
+    gulp.watch('./src/sass/**/*.scss', userref);
+    gulp.watch('./src/*.html', userref);
+    // gulp.watch('./src/*.php', PHPrender);
     gulp.watch('./src/js/**/*.js', minifyjs);
     // gulp.watch('./src/js/**/*.js', jspublic);
-    // gulp.watch('./src/includes/*.html', userref);
+    gulp.watch('./src/includes/*.html', userref);
     gulp.watch('./**/*.html').on('change', browserSync.reload);
     gulp.watch('./src/js/**/*.js').on('change', browserSync.reload);
     gulp.watch('./src/img/', imgminify);
