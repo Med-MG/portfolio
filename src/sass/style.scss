@@ -49,6 +49,7 @@ III. Component
         - burger button
         - buttons frame
         - button
+    2.  - contact form
         
 IV. Layout
 
@@ -88,7 +89,6 @@ V.  Content
         - price
         - testimonials
         - timeline
-        - contact form
         - blog
         - pagination
         - brands
@@ -116,6 +116,7 @@ V.  Content
 
 //Components
 @import "components/buttons";
+@import "components/contact";
 
 //Layouts
 @import "layouts/app-markup";

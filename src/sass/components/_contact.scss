@@ -1,0 +1,105 @@
+/* ----- contact form ----- */
+.art-form-field input,
+.art-form-field textarea {
+  height: 50px;
+  width: 100%;
+  background: $info-bar-2-color;
+  border: none;
+  color: $text-color-1;
+  padding-left: 65px;
+  padding-right: 15px;
+  box-shadow: inset $shadow-2;
+  margin-bottom: 0;
+  transition: $tr-md;
+}
+
+::placeholder {
+  color: $text-color-3;
+}
+
+.art-form-field textarea {
+  padding-left: 15px;
+  padding-top: 15px;
+  height: 150px;
+  border-left: solid 50px $info-bar-1-color;
+
+  &.art-active {
+    border-color: $main-color;
+  }
+
+  &:focus {
+    border-color: $main-color;
+  }
+}
+
+.art-contact-form .art-input:focus {
+  outline: none;
+}
+
+.art-contact-form .art-input.art-active + label,
+.art-contact-form .art-input:focus + label {
+  background: $main-color;
+  color: $info-bar-1-color;
+}
+
+.art-form-field {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.art-contact-form label {
+  text-align: center;
+  color: $text-color-2;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  background: $info-bar-1-color;
+  top: 0;
+  left: 0;
+  padding: 0 15px;
+  text-transform: uppercase;
+  font-size: 11px;
+  line-height: 50px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  transition: $tr-md;
+  cursor: text;
+}
+
+.art-submit-frame {
+  position: relative;
+  height: 45px;
+
+  & .art-submit {
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 999;
+
+    &:focus {
+      outline: inherit;
+    }
+  }
+
+  & .art-success {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: -15px;
+    overflow: hidden;
+    max-width: 150px;
+    transform: scale(0);
+    text-transform: uppercase;
+    color: $text-color-1;
+    background: $info-bar-1-color;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    justify-content: center;
+    align-content: center;
+    border: none;
+    height: 0;
+    font-size: 11px;
+    padding: 15px 35px 0;
+    margin: 0;
+  }
+}
