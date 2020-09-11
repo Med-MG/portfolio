@@ -1,0 +1,55 @@
+/* ------------------------------
+
+app markup
+
+------------------------------ */
+/* ----- top background ----- */
+.art-top-bg {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background-position: center;
+    height: 400px;
+    background-size: cover;
+  
+    & .art-top-bg-overlay {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      background-image: $top-bg-gradient;
+    }
+  }
+  /* ----- preloader ----- */
+  .art-preloader {
+    margin: 15px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100vw - 30px);
+    height: calc(100vh - 30px);
+    background: $info-bar-1-color;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    & .art-preloader-content {
+      margin-bottom: 15px;
+      text-align: center;
+  
+      & .art-preloader-load {
+        margin-top: 5px;
+        width: 200px;
+  
+        & .progressbar-text {
+          position: relative;
+          font-size: 14px;
+          font-weight: 400 !important;
+          color: $text-color-2 !important;
+          height: 300px;
+          line-height: 350px;
+        }
+      }
+    }
+  }
