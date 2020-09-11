@@ -1,0 +1,27 @@
+/* ----- footer ----- */
+footer {
+    width: 100%;
+    padding: 17px 30px 7px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: $card-color;
+    box-shadow: $shadow-2;
+    font-size: 11px;
+    color: $text-color-2;
+    transition: $tr-lg;
+    z-index: 9;
+  
+    & div {
+      margin-bottom: 10px;
+    }
+  
+    & a {
+      transition: $tr-sm;
+  
+      &:hover {
+        color: $text-color-1;
+      }
+    }
+  }
