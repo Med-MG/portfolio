@@ -1,0 +1,24 @@
+/* ------------------------------
+
+transitions
+
+------------------------------ */
+.art-a {
+    transition: $tr-lg;
+  }
+  /* ----- in animation ----- */
+  .transition-fade {
+    transition: $tr-lg;
+    opacity: 1;
+  
+    & .art-a {
+      transform: scale(1);
+      opacity: 1;
+    }
+  
+    & .art-price {
+      &.art-popular-price {
+        transform: scale(1.03);
+      }
+    }
+  }
