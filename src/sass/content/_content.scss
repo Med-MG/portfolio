@@ -1,0 +1,31 @@
+/* ------------------------------
+
+content
+
+------------------------------ */
+/* ----- section title ----- */
+.art-section-title {
+    display: flex;
+    justify-content: space-between;
+  
+    & .art-title-frame {
+      align-self: center;
+      position: relative;
+      margin-bottom: 30px;
+    }
+  
+    & .art-right-frame {
+      padding-bottom: 30px;
+    }
+  }
+/* ----- card ----- */
+.art-card {
+    background: $card-color;
+    box-shadow: $shadow-1;
+    padding: 30px;
+    margin-bottom: 30px;
+  
+    &.art-fluid-card {
+      height: calc(100% - 30px);
+    }
+  }
