@@ -312,3 +312,27 @@ info bar
   }
   }
   
+  /* ----- progresbar color ----- */
+
+.art-line-progress {
+    & path {
+      &:first-child {
+        stroke: $deep-color;
+      }
+      &:last-child {
+        stroke: $main-color;
+      }
+    }
+  }
+  
+  .art-cirkle-progress {
+    & path {
+      &:first-child {
+        stroke: $deep-color;
+      }
+      &:last-child {
+        stroke: $main-color;
+      }
+    }
+  }
+  
