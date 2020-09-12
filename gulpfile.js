@@ -78,13 +78,13 @@ let minifyjs = () => {
 
 
 let imgminify = () => {
-    return gulp.src('src/img/**/*.+(png|jpg|jpeg|gif|svg)')
+    return gulp.src('src/img/**/*.+(png|jpg|jpeg|gif|svg|ico)')
         // Caching images that ran through imagemin
         .pipe(cache(imagemin({
             // Setting interlaced to true
             interlaced: true
         })))
-        .pipe(gulp.dest('dist/images'))
+        .pipe(gulp.dest('dist/img'))
 }
 
 function watch() {
