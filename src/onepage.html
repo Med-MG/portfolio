@@ -1,0 +1,101 @@
+@@include('includes/head.html')
+
+  <!-- app -->
+  <div class="art-app art-app-onepage">
+
+    <!-- mobile top bar -->
+    <div class="art-mobile-top-bar"></div>
+
+    <!-- app wrapper -->
+    <div class="art-app-wrapper">
+
+      <!-- app container end -->
+      <div class="art-app-container">
+
+        <!-- info bar -->
+        @@include('includes/info_bar.html')
+        <!-- info bar end -->
+
+        <!-- content -->
+        <div class="art-content">
+
+          <!-- curtain -->
+          <div class="art-curtain"></div>
+
+          <!-- top background -->
+          <div class="art-top-bg" style="background-image: url(img/bg.jpg)">
+            <!-- overlay -->
+            <div class="art-top-bg-overlay"></div>
+            <!-- overlay end -->
+          </div>
+          <!-- top background end -->
+
+          <!-- swup container -->
+          <div class="transition-fade" id="swup">
+
+            <!-- scroll frame -->
+            <div id="scrollbar" class="art-scroll-frame">
+
+              <!-- container welcomeheader-->
+              @@include('includes/welcomeheader.html')
+              <!-- container welcomeheader end -->
+
+              <!-- container counter-->
+              @@include('includes/counter.html')
+              <!-- container counter end -->
+
+              <!-- container services-->
+              @@include('includes/services.html')
+              <!-- container services end -->
+
+              <!-- container testimonial-->
+              @@include('includes/testimonial.html')
+              <!-- container testimonial end -->
+
+              <!-- container works-->
+              @@include('includes/works.html')
+              <!-- container works end -->
+
+              <!-- container education-->
+              @@include('includes/education.html')
+              <!-- container education end -->
+
+              <!-- container latest posts-->
+              @@include('includes/latestPosts.html')
+              <!-- container latest posts end -->
+
+              <!-- container contact info -->
+              @@include('includes/contact.html')
+              <!-- container contact info end -->
+
+              <!-- container brands -->
+              @@include('includes/brands.html')
+              <!-- container brands end -->
+
+              <!-- container copyright -->
+              @@include('includes/copyright.html')
+              <!-- container copyright end -->
+
+            </div>
+            <!-- scroll frame end -->
+
+          </div>
+          <!-- swup container end -->
+
+        </div>
+        <!-- content end -->
+
+      </div>
+      <!-- app container end -->
+
+    </div>
+    <!-- app wrapper end -->
+
+    <!-- preloader -->
+    @@include('includes/preloader.html')
+    <!-- preloader end -->
+
+  </div>
+  <!-- app end -->
+  <div id="swupMenu"></div>
+  @@include('includes/footer.html')
