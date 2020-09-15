@@ -1,0 +1,19 @@
+{
+    "name": "medmouiguina/portfolio",
+    "description": "This a php based personal resume/portfolio website",
+    "require": {
+        "twig/twig": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MOUIGUINA MOHAMED",
+            "email": "mohamedmouiguina7@gmail.com"
+        }
+    ]
+}
