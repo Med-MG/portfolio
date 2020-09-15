@@ -1,13 +1,23 @@
 <?php 
 
-spl_autoload_register(function($class){
-    if(file_exists("controllers/{$class}.php")){
-        require_once "controllers/{$class}.php";
-    }else if(file_exists("models/{$class}.php")){
-        require_once "models/{$class}.php";
-    }else{
-        die('The file doesn\'t exists.');
-    }
-});
+/** 
+ * @Author: Mohamed Mouiguina 
+ * @Date: 2020-09-15 19:32:46 
+ * @file:  Front Controller
+ * @PHP: version 7.3.5
+ */
 
-?>
+ /** 
+  * composer
+  */
+
+  require dirname(__DIR__) .  '/vendor/autoload.php';
+
+  /** 
+   * Error and Exception handling 
+   */
+
+   /** 
+    * Routing  
+    */
+    
