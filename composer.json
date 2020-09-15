@@ -1,0 +1,13 @@
+{
+    "name": "medmouiguina/portfolio",
+    "description": "This a php based personal resume/portfolio website",
+    "require": {
+        "twig/twig": "^3.0"
+    },
+    "authors": [
+        {
+            "name": "MOUIGUINA MOHAMED",
+            "email": "mohamedmouiguina7@gmail.com"
+        }
+    ]
+}
