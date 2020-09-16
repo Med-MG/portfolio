@@ -11,7 +11,7 @@
   * composer
   */
 
-  require dirname(__DIR__) .  '/vendor/autoload.php';
+    require dirname(__DIR__) . '/vendor/autoload.php';
 
   /** 
    * Error and Exception handling 
@@ -20,4 +20,11 @@
    /** 
     * Routing  
     */
+    $router = new Core\Router();
+
+    //Add the routes
+    $router->add('', ['controller' => 'Home', 'action' => 'index']);
+    $router->add('{controller}/{action}');
     
+    $router->dispatch($_SERVER['QUERY_STRING']);
+
