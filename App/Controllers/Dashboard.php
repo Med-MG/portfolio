@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use \Core\View;
+use App\Models\Admin;
 /**
  * Home controller
  *
@@ -11,6 +12,7 @@ use \Core\View;
 
 class Dashboard extends \Core\Controller
 {
+
 
     /**
      * Show the Dashboard page
@@ -23,6 +25,7 @@ class Dashboard extends \Core\Controller
         View::renderTemplate('Admin/dashboard.html');
     }
     
+
 }
 
 

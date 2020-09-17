@@ -34,6 +34,7 @@ session_start();
     //Add the routes
     $router->add('', ['controller' => 'Home', 'action' => 'index']);
     $router->add('dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
+    $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 
     $router->add('{controller}/{action}');
     
