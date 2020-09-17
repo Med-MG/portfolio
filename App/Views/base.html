@@ -35,29 +35,15 @@
 
                         <!-- scroll frame -->
                         <div id="scrollbar" class="art-scroll-frame">
-
-                            <!-- container welcomeheader-->
-                        
-                            <!-- container welcomeheader end -->
-
-                            <!-- container counter-->
-                            
-                            <!-- container counter end -->
-
-                            <!-- container services-->
-                            
-                            <!-- container services end -->
-
-                            <!-- container testimonial-->
-                            
-                            <!-- container testimonial end -->
+                            <!-- Body template (twig template) -->
+                            {% block body %}{% endblock %}
 
                             <!-- container brands -->
-                           
+                            {% include 'inc/brands.html' %}
                             <!-- container brands end -->
 
                             <!-- container copyright -->
-                            
+                            {% include 'inc/copyright.html' %}
                             <!-- container copyright end -->
 
                         </div>
@@ -173,16 +159,8 @@
         <!-- app wrapper end -->
 
         <!-- preloader -->
-        <div class="art-preloader">
-            <!-- preloader content -->
-            <div class="art-preloader-content">
-                <!-- title -->
-                <h4>Mohamed Mouiguina</h4>
-                <!-- progressbar -->
-                <div id="preloader" class="art-preloader-load"></div>
-            </div>
-            <!-- preloader content end -->
-        </div>
+        {% include 'inc/preloader.html' %}
+
         <!-- preloader end -->
 
     </div>
