@@ -20,7 +20,7 @@ class Config
      * Database name
      * @var string
      */
-    const DB_NAME = 'portfolio';
+    const DB_NAME = 'portfoliodb';
 
     /**
      * Database user

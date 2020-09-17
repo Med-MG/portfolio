@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
-
+use \App\Models\Personal;
 /**
  * Home controller
  *
@@ -20,5 +20,14 @@ class Home extends \Core\Controller
     public function indexAction()
     {
         View::renderTemplate('Home/index.html');
+    }
+    /**
+     * Show the index page
+     *
+     * @return mixed User object if found, false otherwise 
+     */
+    public static function getPersonalInfo()
+    {
+        return Personal::personalInfo();
     }
 }
