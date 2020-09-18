@@ -52,8 +52,38 @@ use App\Models\Admin;
 
         // Finally destroy the session
         session_destroy();
+    }
+    /**
+     * Remember the originally-requested page in the session
+     *
+     * @return void
+     */
+    public static function rememberRequestedPage()
+    {
+        $_SESSION['return_to'] = $_SERVER['REQUEST_URI'];
+    }
 
-        static::forgetLogin();
+    /**
+     * Get the originally-requested page to return to after requiring login, or default to the homepage
+     *
+     * @return void
+     */
+    public static function getReturnToPage()
+    {
+        return $_SESSION['return_to'] ?? '/';
+    }
+        /**
+     * Get the current logged-in user, from the session or the remember-me cookie
+     *
+     * @return mixed The user model or null if not logged in
+     */
+    public static function getUser()
+    {
+        if (isset($_SESSION['user_id'])) {
+
+            return User::findByID($_SESSION['user_id']);
+
+        }
     }
  }
 

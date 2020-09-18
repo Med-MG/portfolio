@@ -46,6 +46,7 @@ class View
         if ($twig === null) {
             $loader = new \Twig\Loader\Filesystemloader(dirname(__DIR__) . '/App/Views');
             $twig = new \Twig\Environment($loader);
+            $twig->addGlobal('admin', \App\Auth::getUser());
             $twig->addGlobal('personal_info', \App\Controllers\Home::getPersonalInfo());
 
         }
