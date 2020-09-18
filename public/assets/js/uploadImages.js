@@ -83,7 +83,7 @@ $.fn.uploadImagesPreview = function(form, options, callback){
 									var file = files[i];
 									var reader = new FileReader();
 									reader.onload = function(e){
-										$(self).prepend("<div class='progress'><div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'></div></div><table style='display: none;' class='table table-condensed' image-upload-item='"+random_class+"'><tr><td><img src='"+e.target.result+"' class='img-responsive' /></td><td style='text-align:right;'><button type='button' class='btn btn-danger' image-upload-item='"+random_class+"' ><span class='glyphicon glyphicon-remove'></span></button></td></tr></table>");
+										$(self).prepend("<div class='progress'><div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='100' aria-valuemin='0' aria-valuemax='100' style='width: 100%'></div></div><table style='display: none;' class='table table-condensed' image-upload-item='"+random_class+"'><tr><td><img src='"+e.target.result+"' class='img-responsive' /></td><td style='text-align:right;'><button type='button' class='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x btn btn-outline-danger' image-upload-item='"+random_class+"' ><i class='pe-7s-trash btn-icon-wrapper'></i>Delete</button></td></tr></table>");
 										$(self).find("[image-upload-item='" + random_class + "']").fadeIn(1000, function(){$(".progress").fadeOut(1000, function(){$(this).remove();});});
 										$(form + " .count-images").html($(self).countImages());
 										$.event.trigger({type: "createImage", file: eval("__items__upload__"+element+"[random_class]")});
