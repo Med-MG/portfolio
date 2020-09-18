@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use \Core\View;
 use App\Models\Admin;
+use App\Auth;
 /**
  * Home controller
  *
@@ -34,13 +35,26 @@ class Login extends \Core\Controller
     public function createAction()
     {
         // echo $_REQUEST['email'] . " " . $_REQUEST['password'];
-        $admin = Admin::authenticate($_POST['email'], $_POST['password']);
-        if($admin){
-            header('Location: http://'.$_SERVER['HTTP_HOST'] . '/', true, 303);
-            exit;
+        $user = Admin::authenticate($_POST['email'], $_POST['password']);
+        if($user){
+            Auth::login($user);
+            $this->redirect('/');
+            
         }else {
-            View::renderTemplate('Admin/login.html');
+            View::renderTemplate('Admin/login.html', ["email" => $_POST['email']]);
         }
+    }
+
+    /**
+     * Log out a user
+     *
+     * @return void
+     */
+    public function destroyAction()
+    {
+        Auth::logout();
+
+        $this->redirect('/login/show-logout-message');
     }
 }
 

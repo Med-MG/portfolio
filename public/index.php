@@ -26,17 +26,18 @@ set_exception_handler('Core\Error::exceptionHandler');
  */
 session_start();
 
-   /** 
-    * Routing  
-    */
-    $router = new Core\Router();
+/** 
+* Routing  
+*/
+$router = new Core\Router();
 
-    //Add the routes
-    $router->add('', ['controller' => 'Home', 'action' => 'index']);
-    $router->add('dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
-    $router->add('login', ['controller' => 'Login', 'action' => 'new']);
+//Add the routes
+$router->add('', ['controller' => 'Home', 'action' => 'index']);
+$router->add('dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
+$router->add('login', ['controller' => 'Login', 'action' => 'new']);
+$router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 
-    $router->add('{controller}/{action}');
-    
-    $router->dispatch($_SERVER['QUERY_STRING']);
+$router->add('{controller}/{action}');
+
+$router->dispatch($_SERVER['QUERY_STRING']);
 
