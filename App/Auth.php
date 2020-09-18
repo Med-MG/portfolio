@@ -16,7 +16,6 @@ use App\Models\Admin;
      * Login the user
      *
      * @param User $user The user model
-     * @param boolean $remember_me Remember the login if true
      *
      * @return void
      */

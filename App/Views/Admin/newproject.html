@@ -11,23 +11,23 @@
                 <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
-                            <label for="validationCustom01">Title</label>
-                            <input type="text" class="form-control" id="validationCustom01" placeholder="project title" name="title" required="" />
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="project title" name="title" required="" />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="validationCustom02">Location</label>
-                            <input type="text" class="form-control" id="validationCustom02" placeholder="location" name="location" required="" />
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="location" name="location" required="" />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="exampleCustomSelect">Category</label>
-                            <select type="select" id="exampleCustomSelect" name="category" required class="custom-select">
+                            <label for="category">Category</label>
+                            <select type="select" id="category" name="category" required class="custom-select">
                                 <option value="">Select</option>
                                 <option>Value 1</option>
                                 <option>Value 2</option>
@@ -40,29 +40,29 @@
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="exampleText" class="">project short description</label>
-                            <textarea name="description" id="exampleText" class="form-control" ></textarea>
+                            <label for="description" class="">project short description</label>
+                            <textarea name="description" id="description" class="form-control" ></textarea>
                         </div>
                     </div>
                     <h5 class="card-title">Date and time</h5>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="validationCustom03">Order date</label>
-                            <input type="text" class="form-control" name="order_date" data-toggle="datepicker-year">
+                            <label for="order_date">Order date</label>
+                            <input type="text" id="order_date" class="form-control" name="order_date" data-toggle="datepicker-year">
                             <div class="invalid-feedback">
                                 Please provide a valid date.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom04">final date</label>
-                            <input type="text" class="form-control" name="final_date" data-toggle="datepicker-year">
+                            <input type="text" class="form-control" id="final_date" name="final_date" data-toggle="datepicker-year">
                             <div class="invalid-feedback">
                                 Please provide a valid time.
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="projectlink" class="">project link (optional)</label>
-                            <input type="text" class="form-control" id="projectlink" placeholder="location" name="link"/>
+                            <input type="text" class="form-control" id="projectlink" placeholder="Link" name="projectlink"/>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -184,7 +184,15 @@
 		if ($("#upload-preview").countImages() > 0)
 		{
 			$("#upload-preview").uploadImagesAjax("ajax.php", {
-				params: {project_name: $("#project_name").val()}, /* Set the extra parameters here */
+				params: {
+                    title: $("#title").val(),
+                    location: $("#location").val(),
+                    category: $("#category").val(),
+                    description: $("#description").val(),
+                    order_date: $("#order_date").val(),
+                    final_date: $("#final_date").val(),
+                    projectlink: $("#final_date").val()
+                }, /* Set the extra parameters here */
 				beforeSend: function(){console.log("Sending ...");},
 				success: function(data){$("#upload-preview").html(data); $("#form").fadeOut();},
 				error: function(e){console.log(e.status);console.log(e.statusText);},
