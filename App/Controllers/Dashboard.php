@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use \Core\View;
 use App\Models\Admin;
+
 /**
  * Home controller
  *
@@ -10,7 +11,7 @@ use App\Models\Admin;
  */
 
 
-class Dashboard extends \Core\Controller
+class Dashboard extends Authenticated
 {
 
 

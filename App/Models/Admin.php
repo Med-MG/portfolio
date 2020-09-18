@@ -79,7 +79,7 @@ class Admin extends \Core\Model
      */
     public static function findByID($id)
     {
-        $sql = 'SELECT * FROM admin WHERE id = ?';
+        $sql = 'SELECT ad.*, m.file_location FROM admin ad join media m on ad.image = m.id WHERE m.id = ?';
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);

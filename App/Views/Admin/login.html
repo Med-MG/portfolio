@@ -70,6 +70,14 @@
                     </div>
                     <div class="h-100 d-flex bg-white justify-content-center align-items-center col-md-12 col-lg-8">
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
+                            {% for messages in flash_messages%}
+                            <div class="mbg-3 alert alert-{{messages.type}} alert-dismissible fade show" role="alert">
+                                <span class="pr-2">
+                                    <i class="fa fa-question-circle"></i>
+                                </span>
+                                {{messages.body}}
+                            </div>
+                            {% endfor %}
                             <div class="app-logo"></div>
                             <h4 class="mb-0">
                                 <span class="d-block">Welcome back,</span>

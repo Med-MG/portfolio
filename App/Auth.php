@@ -70,7 +70,7 @@ use App\Models\Admin;
      */
     public static function getReturnToPage()
     {
-        return $_SESSION['return_to'] ?? '/';
+        return $_SESSION['return_to'] ?? '/dashboard';
     }
         /**
      * Get the current logged-in user, from the session or the remember-me cookie
@@ -81,7 +81,7 @@ use App\Models\Admin;
     {
         if (isset($_SESSION['user_id'])) {
 
-            return User::findByID($_SESSION['user_id']);
+            return Admin::findByID($_SESSION['user_id']);
 
         }
     }

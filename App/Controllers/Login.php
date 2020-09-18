@@ -4,6 +4,8 @@ namespace App\Controllers;
 use \Core\View;
 use App\Models\Admin;
 use App\Auth;
+use \App\Flash;
+
 /**
  * Home controller
  *
@@ -38,9 +40,14 @@ class Login extends \Core\Controller
         $user = Admin::authenticate($_POST['email'], $_POST['password']);
         if($user){
             Auth::login($user);
-            $this->redirect('/');
+
+            Flash::addMessage('Login successful');
+
+            $this->redirect(Auth::getReturnToPage());
             
         }else {
+            Flash::addMessage('Login unsuccessful, please try again', Flash::WARNING);
+
             View::renderTemplate('Admin/login.html', ["email" => $_POST['email']]);
         }
     }
@@ -54,7 +61,21 @@ class Login extends \Core\Controller
     {
         Auth::logout();
 
-        $this->redirect('/login/show-logout-message');
+        $this->redirect('/login');
+    }
+
+        /**
+     * Show a "logged out" flash message and redirect to the homepage. Necessary to use the flash messages
+     * as they use the session and at the end of the logout method (destroyAction) the session is destroyed
+     * so a new action needs to be called in order to use the session.
+     *
+     * @return void
+     */
+    public function showLogoutMessageAction()
+    {
+        Flash::addMessage('Logout successful');
+
+        $this->redirect('/');
     }
 }
 
