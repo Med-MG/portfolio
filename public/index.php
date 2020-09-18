@@ -36,8 +36,8 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
-$router->add('/project/upload', ['controller' => 'Project', 'action' => 'upload']);
 
+//routes with using var placeholders
 $router->add('{controller}/{action}');
 
 $router->dispatch($_SERVER['QUERY_STRING']);

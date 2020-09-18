@@ -14,50 +14,50 @@ class uploadImages{
      * Image type
      * @var string
      */
-    public $image_type;
+    public static  $image_type = "jpg|jpeg|png|gif";
     /**
      * Image max size
      * @var string
      */
-    public $min_size;
+    public static  $min_size = 24;
     /**
      * Image minimum size
      * @var string
      */
-    public $max_size;
+    public static $max_size = (1024*1024*3);
     /**
      * max number of files
      * @var integer
      */
-    public $max_files;
+    public static  $max_files = 10;
     /**
      * Folder path
      * @var string
      */
-    public $folder;
+    public static  $folder;
     /**
      * errors array
      * @var array
      */
-	public $error;
+	public static  $error = array();
 	/**
      * Class constructor
      *
      * @return void
      */
-	function __construct(){
-		$this->image_type = "jpg|jpeg|png|gif";
-		$this->min_size = 24;
-		$this->max_size = (1024*1024*3);
-		$this->max_files = 10;
-		$this->error = array();
-	}
+	// function __construct(){
+	// 	// static::$image_type = "jpg|jpeg|png|gif";
+	// 	// static::$min_size = 24;
+	// 	// static::$max_size = (1024*1024*3);
+	// 	// static::$max_files = 10;
+	// 	// static::$error = array();
+	// }
 	/**
      * Counting the number of images method
      *
      * @return int return an integer
      */
-	public function countImages()
+	public static function countImages()
 	{
 		foreach ($_FILES as $file)
 		{
@@ -70,7 +70,7 @@ class uploadImages{
      *
      * @return array returns an array or images
      */
-	public function getImages()
+	public static function getImages()
 	{
 		$images = array();
 		foreach ($_FILES as $file)
@@ -93,7 +93,7 @@ class uploadImages{
      *
      * @return array
      */
-	public function getParams()
+	public static function getParams()
 	{
 		return $_GET;
     }
@@ -104,7 +104,7 @@ class uploadImages{
      * 
      * @return bool
      */
-	public function saveImage($tmp_name, $folder, $image_name)
+	public static function saveImage($tmp_name, $folder, $image_name)
 	{
 		if(move_uploaded_file($tmp_name, $folder.$image_name))
 		{
@@ -121,43 +121,43 @@ class uploadImages{
      * 
      * @return bool
      */
-	public function validateImages()
+	public static function validateImages()
 	{
-		$images = $this->getImages();
+		$images = static::getImages();
+        
 		
 		foreach ($images as $image)
 		{
 			$type = $image["type"];
 			$image_type = explode("/", $type);
-			$content_type = explode("|", $this->image_type);
+			$content_type = explode("|", self::$image_type);
 			$size = $image["size"];
-			
-			if (count($images) > $this->max_files)
+			if (count($images) > self::$max_files)
 			{
-				$this->error = array("error_type" => "ERROR_MAX_FILES");
+				self::$error = array("error_type" => "ERROR_MAX_FILES");
 				break;
 			}
 			else if (!array_search($image_type[1], $content_type))
 			{
-				$this->error = array(
+				self::$error = array(
 				"error_type" => "ERROR_CONTENT_TYPE", 
 				"image_name" => $image["name"], 
 				"image_type" => $image["type"]
 				);
 				break;
 			}
-			else if ($size < $this->min_size)
+			else if ($size < self::$min_size)
 			{
-				$this->error = array(
+				self::$error = array(
 				"error_type" => "ERROR_MIN_SIZE", 
 				"image_name" => $image["name"], 
 				"image_type" => $image["size"]
 				);
 				break;
 			}
-			else if ($size > $this->max_size)
+			else if ($size > self::$max_size)
 			{
-				$this->error = array(
+				self::$error = array(
 				"error_type" => "ERROR_MAX_SIZE", 
 				"image_name" => $image["name"], 
 				"image_type" => $image["size"]

@@ -32,41 +32,47 @@ class Project extends Authenticated
 
     public function uploadAction()
     {        
+
+
         /* Images are required */
         if (UploadImages::countImages() > 0)
         {
-        
-        /* Validate */
-        if (UploadImages::validateImages())
-        {
-            print("<h3 class='text-info'>IMAGES</h3>");
-            /* images array */
-            $images = UploadImages::getImages();
-            foreach ($images as $image)
-            {
-                /* save the image */
-                if (UploadImages::saveImage($image["tmp_name"], "assets/images/", $image["name"]))
+                /* Validate */
+                if (UploadImages::validateImages())
                 {
-                    print ("<p class='text-success'>· <strong>" . $image["name"] . "</strong> saved in images folder</p>");
+                    print("<h3 class='text-info'>IMAGES</h3>");
+                    /* images array */
+                    $images = UploadImages::getImages();
+                    foreach ($images as $image)
+                    {
+                        /* save the image */
+                        if (UploadImages::saveImage($image["tmp_name"], "assets/images/", $image["name"]))
+                        {
+                            print ("<p class='text-success'>· <strong>" . $image["name"] . "</strong> saved in images folder</p>");
+                            
+
+                        }
+                        else
+                        {
+                            print("<p class='text-danger'>· " . $image["name"] . " error to saved</p>");
+                        }
+                    }
+                    /* GET EXTRA PARAMETERS */
+                    print("<h3 class='text-info'>EXTRA PARAMETERS</h3>");
+                    print_r(UploadImages::getParams());
                 }
-                else
+                else /* Show errors array */
                 {
-                    print("<p class='text-danger'>· " . $image["name"] . " error to saved</p>");
+                    print_r(UploadImages::$error);
                 }
-            }
-            /* GET EXTRA PARAMETERS */
-            print("<h3 class='text-info'>EXTRA PARAMETERS</h3>");
-            print_r(UploadImages::getParams());
-        }
-        else /* Show errors array */
-        {
-            print_r(UploadImages::error);
-        }
+
         }
         else
         {
-            print("<p class='text-danger'>images required</p>");
+            throw new \Exception("images required");
         }
     }
+
+    
 
 }
