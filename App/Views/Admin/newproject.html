@@ -1,0 +1,123 @@
+{% extends "adminbase.html" %}
+{% block icon %}pe-7s-graph{% endblock %}
+{% block title %}New Project{% endblock %}
+{% block subtitle %} By submitting this form you will create new project {% endblock %}
+{% block innerbody %}
+<div class="row justify-content-xl-center">
+    <div class="col-md-8">
+        <div class="main-card mb-2 card">
+            <div class="card-body">
+                <h5 class="card-title">General Info</h5>
+                <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="" >
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom01">Title</label>
+                            <input type="text" class="form-control" id="validationCustom01" placeholder="project title" name="title" required="" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom02">Location</label>
+                            <input type="text" class="form-control" id="validationCustom02" placeholder="location" name="location" required="" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="exampleCustomSelect">Category</label>
+                            <select type="select" id="exampleCustomSelect" name="category" required class="custom-select">
+                                <option value="">Select</option>
+                                <option>Value 1</option>
+                                <option>Value 2</option>
+                                <option>Value 3</option>
+                                <option>Value 4</option>
+                                <option>Value 5</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="exampleText" class="">project short description</label>
+                            <textarea name="description" id="exampleText" class="form-control" ></textarea>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Date and time</h5>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom03">Order date</label>
+                            <input type="text" class="form-control" name="order_date" data-toggle="datepicker-year">
+                            <div class="invalid-feedback">
+                                Please provide a valid date.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom04">final date</label>
+                            <input type="text" class="form-control" name="final_date" data-toggle="datepicker-year">
+                            <div class="invalid-feedback">
+                                Please provide a valid time.
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="projectlink" class="">project link (optional)</label>
+                            <input type="text" class="form-control" id="projectlink" placeholder="location" name="link"/>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title">project images</h5>
+                    <div class="col-md-6 mb-3">
+                        <span class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-focus">
+                            <i class="pe-7s-upload btn-icon-wrapper"></i>
+                            <span>Select file...</span>
+                                <!-- The file input field used as target for the file upload widget -->
+                            <input id="fileupload" multiple type="file" name="files" accept="image/x-png, image/gif, image/jpeg" style="position: absolute;top: 0;opacity: 0;left: 0;">
+                        </span>
+                        <!-- <input name="file" id="exampleFile" type="file" class="form-control-file"> -->
+                        <small class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    </div>
+                    <input class="btn btn-primary" id="submit_event" type="submit" name="submit" value="Submit form">
+                </form>
+    
+                <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function () {
+                        "use strict";
+                        window.addEventListener(
+                            "load",
+                            function () {
+                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                var forms = document.getElementsByClassName("needs-validation");
+                                // Loop over them and prevent submission
+                                var validation = Array.prototype.filter.call(forms, function (
+                                    form
+                                ) {
+                                    form.addEventListener(
+                                        "submit",
+                                        function (event) {
+                                            if (form.checkValidity() === false) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+                                            }
+                                            form.classList.add("was-validated");
+                                        },
+                                        false
+                                    );
+                                });
+                            },
+                            false
+                        );
+                    })();
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="/assets/js/uploadImages.js"></script>
+{% endblock %}

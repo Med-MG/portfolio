@@ -5,10 +5,10 @@ use \Core\View;
 use App\Models\Admin;
 
 /**
- * Home controller
+ * Dashboard controller
  *
  * PHP version 7.0
- */
+*/
 
 
 class Dashboard extends Authenticated

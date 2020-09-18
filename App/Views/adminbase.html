@@ -63,7 +63,7 @@
                         <button class="close"></button>
                     </div>
                 </div>
-                
+
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
                         <div class="widget-content p-0">
@@ -72,8 +72,7 @@
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                             class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="{{admin.file_location}}"
-                                                alt="">
+                                            <img width="42" class="rounded-circle" src="{{admin.file_location}}" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true"
@@ -93,12 +92,13 @@
                                                                 <div class="widget-content-left">
                                                                     <div class="widget-heading">{{admin.full_name}}
                                                                     </div>
-                                                                    <div class="widget-subheading opacity-8">{{admin.occupation}}
+                                                                    <div class="widget-subheading opacity-8">
+                                                                        {{admin.occupation}}
                                                                     </div>
                                                                 </div>
                                                                 <div class="widget-content-right mr-2">
-                                                                    <a
-                                                                      href="/login/destroy"  class="btn-pill btn-shadow btn-shine btn btn-focus">Logout
+                                                                    <a href="/login/destroy"
+                                                                        class="btn-pill btn-shadow btn-shine btn btn-focus">Logout
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -794,7 +794,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="admin/addproject">
+                                        <a href="Project/new">
                                             <i class="metismenu-icon">
                                             </i>Add project
                                         </a>
@@ -852,18 +852,15 @@
             </div>
             <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <div class="app-page-title app-page-title-simple">
+                    <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
-                                <div>
-                                    <div class="page-title-head center-elem">
-                                        <span class="d-inline-block pr-2">
-                                            <i class="lnr-apartment opacity-6"></i>
-                                        </span>
-                                        <span class="d-inline-block">{% block title %}{% endblock %}</span>
-                                    </div>
-                                    <div class="page-title-subheading opacity-10">
-                                        {% block subtitle %}{% endblock %}
+                                <div class="page-title-icon">
+                                    <i class="{% block icon %}{% endblock %} text-success">
+                                    </i>
+                                </div>
+                                <div>{% block title %}{% endblock %}
+                                    <div class="page-title-subheading">{% block subtitle %}{% endblock %}
                                     </div>
                                 </div>
                             </div>
@@ -1562,6 +1559,8 @@
     </div>
     <div class="app-drawer-overlay d-none animated fadeIn"></div>
     <script type="text/javascript" src="/assets/js/admin.js"></script>
+    {% block scripts %}{% endblock %}
+
 </body>
 
 </html>
