@@ -46,6 +46,8 @@ class View
         if ($twig === null) {
             $loader = new \Twig\Loader\Filesystemloader(dirname(__DIR__) . '/App/Views');
             $twig = new \Twig\Environment($loader);
+            $twig->addGlobal('admin', \App\Auth::getUser());
+            $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('personal_info', \App\Controllers\Home::getPersonalInfo());
 
         }
