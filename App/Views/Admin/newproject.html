@@ -79,7 +79,7 @@
                         <!-- <input name="file" id="exampleFile" type="file" class="form-control-file"> -->
                         <small class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
                     </div>
-                    <input class="btn btn-primary" id="submit_event" type="submit" name="submit" value="Submit form">
+                    <input class="btn btn-primary" id="btn" type="submit" name="submit" value="Submit form">
                 </form>
     
                 <script>
@@ -183,7 +183,7 @@
 		/*images are required */
 		if ($("#upload-preview").countImages() > 0)
 		{
-			$("#upload-preview").uploadImagesAjax("ajax.php", {
+			$("#upload-preview").uploadImagesAjax("/project/upload", {
 				params: {
                     title: $("#title").val(),
                     location: $("#location").val(),
