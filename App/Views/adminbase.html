@@ -16,7 +16,13 @@
     <meta name="msapplication-tap-highlight" content="no">
     <!-- bootstrap css -->
     <link rel="stylesheet" href="/assets/css/plugins/bootstrap.min.css">
-
+    <!-- toastr notification -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+        <!-- jquery js -->
+        <script src="/assets/js/plugins/jquery.min.js"></script>
+        <!-- toastr notification -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <!-- custom css -->
     <link href="/assets/css/admin.css" rel="stylesheet">
     <style>
         .img-responsive{
@@ -392,25 +398,6 @@
                         </h3>
                         <div class="p-3">
                             <ul class="list-group">
-                                <!--<li class="list-group-item">
-                                <div class="widget-content p-0">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left mr-3">
-                                            <div class="switch has-switch" data-on-label="ON" data-off-label="OFF">
-                                                <div class="switch-animate switch-off">
-                                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Sidebar Background Image
-                                            </div>
-                                            <div class="widget-subheading">Enable background images for sidebar!
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>-->
                                 <li class="list-group-item">
                                     <h5 class="pb-2">Choose Color Scheme
                                     </h5>
@@ -527,33 +514,6 @@
                                         </div>
                                     </div>
                                 </li>
-                                <!--<li class="theme-settings-swatches d-none list-group-item">
-                                <div class="widget-content p-0">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Background Opacity
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div role="group" class="btn-group-sm btn-group">
-                                                <button type="button" class="btn-shadow opacity-3 active btn btn-primary">4%
-                                                </button>
-                                                <button type="button" class="btn-shadow opacity-4 btn btn-primary">6%
-                                                </button>
-                                                <button type="button" class="btn-shadow opacity-5 btn btn-primary">8%
-                                                </button>
-                                                <button type="button" class="btn-shadow opacity-6 btn btn-primary">10%
-                                                </button>
-                                                <button type="button" class="btn-shadow opacity-7 btn btn-primary">15%
-                                                </button>
-                                                <button type="button" class="btn-shadow opacity-8 btn btn-primary">20%
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>-->
-                                <!--<li class="theme-settings-swatches d-none list-group-item">
                                 <h5>Sidebar Image Background
                                 </h5>
                                 <div class="divider">
@@ -619,44 +579,6 @@
                         </h3>
                         <div class="p-3">
                             <ul class="list-group">
-                                <!--<li class="list-group-item">
-                                <div class="widget-content p-0">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left mr-3">
-                                            <div class="switch has-switch" data-on-label="ON" data-off-label="OFF">
-                                                <div class="switch-animate switch-on">
-                                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Page Title Icon
-                                            </div>
-                                            <div class="widget-subheading">Enable the icon box for page titles!
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="widget-content p-0">
-                                    <div class="widget-content-wrapper">
-                                        <div class="widget-content-left mr-3">
-                                            <div class="switch has-switch" data-on-label="ON" data-off-label="OFF">
-                                                <div class="switch-animate switch-on">
-                                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">Page Title Description
-                                            </div>
-                                            <div class="widget-subheading">Enable the description below page title!
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>-->
                                 <li class="list-group-item">
                                     <h5 class="pb-2">Page Section Tabs
                                     </h5>
@@ -801,19 +723,19 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="Project/new">
+                                        <a href="/Project/new">
                                             <i class="metismenu-icon">
                                             </i>Add project
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="admin/manageproject">
+                                        <a href="/Project/manage">
                                             <i class="metismenu-icon">
                                             </i>Manage project
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="admin/managecategories">
+                                        <a href="/Project/managecategories">
                                             <i class="metismenu-icon">
                                             </i>manage categories
                                         </a>
@@ -1566,8 +1488,15 @@
     </div>
     <div class="app-drawer-overlay d-none animated fadeIn"></div>
     <script type="text/javascript" src="/assets/js/admin.js"></script>
-    <!-- jquery js -->
-    <script src="/assets/js/plugins/jquery.min.js"></script>
+
+    <!-- ckeditor -->
+    <script src="//cdn.ckeditor.com/4.14.1/full/ckeditor.js"></script>
+    <!-- <script>
+        CKEDITOR.replace( 'editor' );
+    </script> -->
+
+
+
     {% block scripts %}{% endblock %}
 
 </body>

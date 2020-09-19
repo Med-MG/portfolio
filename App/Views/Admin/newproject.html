@@ -25,15 +25,14 @@
                                 Looks good!
                             </div>
                         </div>
+                        
                         <div class="col-md-4 mb-3">
                             <label for="category">Category</label>
                             <select type="select" id="category" name="category" required class="custom-select">
                                 <option value="">Select</option>
-                                <option>Value 1</option>
-                                <option>Value 2</option>
-                                <option>Value 3</option>
-                                <option>Value 4</option>
-                                <option>Value 5</option>
+                                {% for cat in categories %}
+                                    <option value="{{cat.id}}">{{ cat.cat_name|e }}</option>
+                                {% endfor %}
                             </select>
                             <div class="valid-feedback">
                                 Looks good!
@@ -41,21 +40,21 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="description" class="">project short description</label>
-                            <textarea name="description" id="description" class="form-control" ></textarea>
+                            <textarea name="description" id="description" class="form-control" required="" ></textarea>
                         </div>
                     </div>
                     <h5 class="card-title">Date and time</h5>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="order_date">Order date</label>
-                            <input type="text" id="order_date" class="form-control" name="order_date" data-toggle="datepicker-year">
+                            <input type="date" id="order_date" class="form-control" name="order_date" required="">
                             <div class="invalid-feedback">
                                 Please provide a valid date.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom04">final date</label>
-                            <input type="text" class="form-control" id="final_date" name="final_date" data-toggle="datepicker-year">
+                            <input type="date" class="form-control" id="final_date" name="final_date" required="">
                             <div class="invalid-feedback">
                                 Please provide a valid time.
                             </div>
@@ -74,7 +73,7 @@
                             <i class="pe-7s-upload btn-icon-wrapper"></i>
                             <span>Select file...</span>
                                 <!-- The file input field used as target for the file upload widget -->
-                            <input id="fileupload" multiple type="file" class="btn" name="files" accept="image/x-png, image/gif, image/jpeg" style="position: absolute;top: 0;opacity: 0;left: 0;">
+                            <input id="fileupload" multiple type="file" class="btn" name="files" accept="image/x-png, image/gif, image/jpeg" style="position: absolute;top: 0;opacity: 0;left: 0;" required="">
                         </span>
                         <!-- <input name="file" id="exampleFile" type="file" class="form-control-file"> -->
                         <small class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
@@ -115,7 +114,14 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4" id="upload-preview"></div>
+    <div class="col-md-4" >
+        <div class="main-card mb-2 card">
+            <div class="card-body">
+                <h5 class="card-title">Uploaded Images</h5>
+                <div id="upload-preview"></div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -191,11 +197,40 @@
                     description: $("#description").val(),
                     order_date: $("#order_date").val(),
                     final_date: $("#final_date").val(),
-                    projectlink: $("#final_date").val()
+                    projectlink: $("#projectlink").val()
                 }, /* Set the extra parameters here */
 				beforeSend: function(){console.log("Sending ...");},
-				success: function(data){$("#upload-preview").html(data); $("#form").fadeOut();},
-				error: function(e){console.log(e.status);console.log(e.statusText);},
+				success: function(data){
+                    $("#upload-preview").html(data); 
+                    $("#upload-preview").fadeOut();
+                    title: $("#title").val("");
+                    location: $("#location").val("");
+                    category: $("#category").val("");
+                    description: $("#description").val("");
+                    order_date: $("#order_date").val("");
+                    final_date: $("#final_date").val("");
+                    projectlink: $("#projectlink").val("");
+                    },
+                error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    console.log(msg);
+                    $('#upload-preview').html('Uncaught Error.\n' + jqXHR.responseText);
+                },
 				complete: function(){console.log("Completed");}
 			});
 		}

@@ -3,7 +3,8 @@
 namespace App\Controllers;
 use \Core\View;
 use App\UploadImages;
-
+use App\Flash;
+use App\Models\ProjectModel;
 /**
  * Dashboard controller
  *
@@ -21,8 +22,12 @@ class Project extends Authenticated
 
     public function newAction()
     {
-        View::renderTemplate('Admin/newproject.html');
+        $cat = ProjectModel::getcategories();
+        View::renderTemplate('Admin/newproject.html', [
+            "categories" => $cat
+        ]);
     }
+
 
     /**
      * Upload project images
@@ -31,48 +36,60 @@ class Project extends Authenticated
     */
 
     public function uploadAction()
-    {        
-
-
-        /* Images are required */
-        if (UploadImages::countImages() > 0)
-        {
-                /* Validate */
-                if (UploadImages::validateImages())
-                {
-                    print("<h3 class='text-info'>IMAGES</h3>");
-                    /* images array */
-                    $images = UploadImages::getImages();
-                    foreach ($images as $image)
+    {      
+        $project = ProjectModel::save();
+        if($project !== false){
+            if (UploadImages::countImages() > 0)
+            {
+                    $validator;
+                    /* Validate */
+                    if (UploadImages::validateImages())
                     {
-                        /* save the image */
-                        if (UploadImages::saveImage($image["tmp_name"], "assets/images/", $image["name"]))
+                        
+                        /* images array */
+                        $images = UploadImages::getImages();
+                        foreach ($images as $image)
                         {
-                            print ("<p class='text-success'>· <strong>" . $image["name"] . "</strong> saved in images folder</p>");
                             
+                            /* save the image to assets/images folder */
+                            UploadImages::saveImage($image["tmp_name"], "assets/images/", $image["name"]);
 
+                            /* save the image to database */
+                            $ImageId = ProjectModel::saveImage("assets/images/", $image["name"], $image["type"],$image["size"]);
+
+                            /*  joined table image and project */
+                            $validator = ProjectModel::joinImagesProject($project, $ImageId);
+                            
                         }
-                        else
-                        {
-                            print("<p class='text-danger'>· " . $image["name"] . " error to saved</p>");
+                        if($validator){
+                            print("<script>toastr.success('project added', 'success')</script>");
+                        }else {
+                            print("<script>toastr.error('project not added', 'error')</script>");
                         }
+
                     }
-                    /* GET EXTRA PARAMETERS */
-                    print("<h3 class='text-info'>EXTRA PARAMETERS</h3>");
-                    print_r(UploadImages::getParams());
-                }
-                else /* Show errors array */
-                {
-                    print_r(UploadImages::$error);
-                }
+                    else /* Show errors array */
+                    {
+                        print_r(UploadImages::$error);
+                    }
+    
+            }
+            else
+            {
+                throw new \Exception("images required");
+            }
+        } else {
+            throw new \Exception("project is not added value is". $project);
+        }
 
-        }
-        else
-        {
-            throw new \Exception("images required");
-        }
     }
 
+    public function managecategoriesAction(){
+        $proj = ProjectModel::getProject();
+        View::renderTemplate('Admin/managecategories.html', [
+            "project" => $proj
+        ]);
+    }
     
 
 }
