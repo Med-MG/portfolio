@@ -163,7 +163,7 @@ class Project extends Authenticated
     }
 
     /**
-     * Update project data database
+     * Fetch and display project data to be updated
      *
      * @return void
     */
@@ -180,4 +180,21 @@ class Project extends Authenticated
  
     }
 
+    /**
+     * Update project data in database
+     *
+     * @return void
+    */
+    public function updateProjectdataAction(){
+        $dataupdated = ProjectModel::updateData($_POST);
+        if($dataupdated){
+            echo json_encode(['code'=>200, 'msg'=>"project updated successfully"]);
+ 
+        } else {
+            echo json_encode(['code'=>400, 'msg'=>"cannot update project due to an error"]);
+        }
+        
+
+        
+    }
 }

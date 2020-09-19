@@ -116,6 +116,7 @@ class ProjectModel extends \Core\Model
      */
     public static function  deleteProject($id)
     {
+        try {
         $sql = "DELETE FROM `project` WHERE `project`.`id` = ?";
 
         $db = static::getDB();
@@ -126,7 +127,9 @@ class ProjectModel extends \Core\Model
         }else{
             return false;
         }
-
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
     }
 
     /**
@@ -136,6 +139,7 @@ class ProjectModel extends \Core\Model
      */
     public static function  deleteImage($id)
     {
+        try {
         $sql = "DELETE m, jp FROM media m LEFT JOIN joinporfoliotable jp on m.id = jp.image WHERE m.id = ?";
 
         $db = static::getDB();
@@ -146,8 +150,28 @@ class ProjectModel extends \Core\Model
         }else{
             return false;
         }
-
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
     }
+
+    public static function updateData($data){
+        try {
+            $sql = "UPDATE `project` SET `title` = ?, `description` = ?, `order_date` = ?, `final_date` = ?, `location` = ?, `link` = ?, `category` = ? WHERE `project`.`id` = ?";
+    
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$_POST['title'], $_POST['description'], $_POST['order_date'], $_POST['final_date'], $_POST['location'], $_POST['projectlink'], $_POST['category'], $_POST['projectId']]);
+                if($stmt->rowCount() > 0) {
+                    return true;
+                }else{
+                    return false;
+                }
+            } catch (PDOException $e) {
+                echo 'query failed' . $e->getMessage();
+            }
+    }
+
     /**
      * Insert Project details
      *

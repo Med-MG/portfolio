@@ -10,6 +10,7 @@
                 <h5 class="card-title">General Info</h5>
                 {% for proj in project %}
                 <form method="POST" id="formEdit" enctype="multipart/form-data" class="needs-validation" novalidate="">
+                    <input type="text" id="project_id" hidden value="{{proj.id}}">
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="title">Title</label>
@@ -302,6 +303,58 @@
                     }
 
                 }
+
+            });
+        })
+        /* delete an image using ajax */
+        $("#btnEdit").on("click", function(e){
+            e.preventDefault();
+            let params = {
+                projectId: $("#project_id").val(),
+                title: $("#title").val(),
+                location: $("#location").val(),
+                category: $("#category").val(),
+                description: $("#description").val(),
+                order_date: $("#order_date").val(),
+                final_date: $("#final_date").val(),
+                projectlink: $("#projectlink").val()
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "/Project/updateProjectdata",
+                dataType: "json",
+                data: params,
+                beforeSend: function(){console.log("Sending ...");},
+				success: function(data){
+                    if(data.code == "200"){
+                        toastr.success(data.msg);
+                    } else {
+                        toastr.error(data.msg);
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    console.log(msg);
+
+                },
+				complete: function(){console.log("Completed");}
+
 
             });
         })
