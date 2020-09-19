@@ -60,6 +60,26 @@ class ProjectModel extends \Core\Model
         return $stmt->fetchAll();
 
     }
+    /**
+     * Fetch all projects
+     *
+     * @return bool true if project, false otherwise
+     */
+    public static function  deleteProject($id)
+    {
+        $sql = "DELETE FROM `project` WHERE `project`.`id` = ?";
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        if($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 
     /**
      * Insert Project details

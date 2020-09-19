@@ -31,7 +31,7 @@
                             <td class="text-center"> {{project.order_date}} </td>
                             <td class="text-center"> {{project.final_date}}</td>
                             <td class="text-center">
-                                <a href="index.php?edit_event=27">
+                                <a href="/Project/edit?id={{project.id}}">
                                     <button type="button" id="PopoverCustomT-1"
                                         class=" btn-wide btn btn-success btn-icon-only">
                                         <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
@@ -39,7 +39,7 @@
                                 </a>
                                 <button type="button" id="PopoverCustomT-1"
                                     class=" btn-icon btn-icon-only btn btn-outline-danger"
-                                    value="index.php?manage_event&amp;delete_event=27" data-toggle="modal"
+                                    value="/Project/delete?id={{project.id}}" data-toggle="modal"
                                     data-target="#exampleModal">
                                     <i class="pe-7s-trash" style="font-size: 1rem;"></i>
                                 </button>
@@ -55,4 +55,13 @@
 {% endblock %}
 
 {% block scripts %}
+    <script>
+        const delete_buttons = document.querySelectorAll('#PopoverCustomT-1');
+        for(const el of delete_buttons ){
+            el.addEventListener('click', (e) => {
+            let link = e.currentTarget.value;
+            document.querySelector('.deletion_link').href = link;
+            });
+        }
+    </script>
 {% endblock %}

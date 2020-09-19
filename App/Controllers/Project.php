@@ -84,6 +84,12 @@ class Project extends Authenticated
 
     }
 
+
+    /**
+     * Display project to be managed
+     *
+     * @return void
+    */
     public function manageAction(){
         $proj = ProjectModel::getProject();
         foreach ($proj as $key => $project) {
@@ -93,6 +99,21 @@ class Project extends Authenticated
         View::renderTemplate('Admin/manageproject.html', [
             "projects" => $proj
         ]);
+    }
+    /**
+     * Delete a project from database
+     *
+     * @return void
+    */
+    public function deleteAction(){
+
+        if(ProjectModel::deleteProject($_GET['id'])){
+            Flash::addMessage('project deleted successful');
+        }else{
+            Flash::addMessage('Delete unsuccessful, please try again', Flash::WARNING);
+        }
+
+        $this->manageAction();
     }
     
 
