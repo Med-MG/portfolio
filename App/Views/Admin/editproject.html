@@ -8,11 +8,12 @@
         <div class="main-card mb-2 card">
             <div class="card-body">
                 <h5 class="card-title">General Info</h5>
+                {% for proj in project %}
                 <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate="" >
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" placeholder="project title" name="title" required="" />
+                            <input type="text" class="form-control" id="title" placeholder="project title" value="{{proj.title}}" name="title" required="" />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -20,7 +21,7 @@
 
                         <div class="col-md-4 mb-3">
                             <label for="location">Location</label>
-                            <input type="text" class="form-control" id="location" placeholder="location" name="location" required="" />
+                            <input type="text" class="form-control" id="location" placeholder="location" value="{{proj.location}}" name="location" required="" />
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -39,29 +40,29 @@
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="description" class="">project short description</label>
-                            <textarea name="description" id="description" class="form-control" required="" ></textarea>
+                            <label for="description"  class="">project short description</label>
+                            <textarea name="description" id="description" class="form-control" required="" >{{proj.description}}</textarea>
                         </div>
                     </div>
                     <h5 class="card-title">Date and time</h5>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="order_date">Order date</label>
-                            <input type="date" id="order_date" class="form-control" name="order_date" required="">
+                            <input type="date" id="order_date" value="{{proj.order_date}}" class="form-control" name="order_date" required="">
                             <div class="invalid-feedback">
                                 Please provide a valid date.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom04">final date</label>
-                            <input type="date" class="form-control" id="final_date" name="final_date" required="">
+                            <input type="date" class="form-control" value="{{proj.final_date}}" id="final_date" name="final_date" required="">
                             <div class="invalid-feedback">
                                 Please provide a valid time.
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
                             <label for="projectlink" class="">project link (optional)</label>
-                            <input type="text" class="form-control" id="projectlink" placeholder="Link" name="projectlink"/>
+                            <input type="text" class="form-control" value="{{proj.link}}" id="projectlink" placeholder="Link" name="projectlink"/>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -80,7 +81,7 @@
                     </div>
                     <input class="btn btn-primary" id="btn" type="submit" name="submit" value="Submit form">
                 </form>
-    
+                {% endfor %}
                 <script>
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
                     (function () {
@@ -189,7 +190,7 @@
 		/*images are required */
 		if ($("#upload-preview").countImages() > 0)
 		{
-			$("#upload-preview").uploadImagesAjax("/project/upload", {
+			$("#upload-preview").uploadImagesAjax("/project/update", {
 				params: {
                     title: $("#title").val(),
                     location: $("#location").val(),
@@ -203,7 +204,13 @@
 				success: function(data){
                     $("#upload-preview").html(data); 
                     $("#upload-preview").fadeOut();
-                    setTimeout(function(){ location.reload();; }, 2000);
+                    title: $("#title").val("");
+                    location: $("#location").val("");
+                    category: $("#category").val("");
+                    description: $("#description").val("");
+                    order_date: $("#order_date").val("");
+                    final_date: $("#final_date").val("");
+                    projectlink: $("#projectlink").val("");
                     },
                 error: function (jqXHR, exception) {
                     var msg = '';

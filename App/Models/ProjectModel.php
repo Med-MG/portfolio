@@ -34,6 +34,8 @@ class ProjectModel extends \Core\Model
      */
     public static function getcategories()
     {
+        try {
+
         $sql = 'SELECT * FROM categories';
 
         $db = static::getDB();
@@ -41,7 +43,9 @@ class ProjectModel extends \Core\Model
         $stmt->execute();
 
         return $stmt->fetchAll();
-
+        } catch (PDOException $e) {
+                    echo 'query failed' . $e->getMessage();
+        }
     }
 
     /**
@@ -51,6 +55,8 @@ class ProjectModel extends \Core\Model
      */
     public static function  getProject()
     {
+        try {
+
         $sql = "SELECT pr.*, cat.cat_name FROM project pr join categories cat on pr.category = cat.id";
 
         $db = static::getDB();
@@ -59,6 +65,49 @@ class ProjectModel extends \Core\Model
 
         return $stmt->fetchAll();
 
+        } catch (PDOException $e) {
+                    echo 'query failed' . $e->getMessage();
+        }
+    }
+    /**
+     * Fetch one project data
+     *
+     * @return array return categories table data
+     */
+    public static function  getoneProject($id)
+    {
+        try {
+
+        $sql = "SELECT * FROM `project` WHERE id = ?";
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+
+        return $stmt->fetchAll();
+        } catch (PDOException $e) {
+                    echo 'query failed' . $e->getMessage();
+        }
+    }
+    /**
+     * Fetch one project images
+     *
+     * @return array return categories table data
+     */
+    public static function  getimagesProject($id)
+    {
+        try {
+        $sql = "SELECT * FROM joinporfoliotable jp join project pr on jp.project = pr.id join media m on jp.image = m.id WHERE jp.project = ?";
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+
+        return $stmt->fetchAll();
+         
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
     }
     /**
      * Fetch all projects

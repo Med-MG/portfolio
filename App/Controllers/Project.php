@@ -115,6 +115,21 @@ class Project extends Authenticated
 
         $this->manageAction();
     }
-    
+
+    /**
+     * Edit a project from database
+     *
+     * @return void
+    */
+    public function editAction(){
+        $proj = ProjectModel::getoneProject($_GET['id']);
+        $projectImages = ProjectModel::getimagesProject($_GET['id']);
+
+        View::renderTemplate('Admin/editproject.html', [
+            "project" => $proj,
+            "images" => $projectImages
+        ]);
+ 
+    }
 
 }
