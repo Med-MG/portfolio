@@ -4,6 +4,7 @@
 
 {% block body %}
     <!-- container -->
+    
     <div class="container-fluid">
 
     <!-- row -->
@@ -16,14 +17,10 @@
         <div class="art-filter mb-30">
             <!-- filter link -->
             <a href="#" data-filter="*" class="art-link art-current">All Categories</a>
-            <!-- filter link -->
-            <a href="#" data-filter=".webTemplates" class="art-link">Web Templates</a>
-            <!-- filter link -->
-            <a href="#" data-filter=".logos" class="art-link">Logos</a>
-            <!-- filter link -->
-            <a href="#" data-filter=".drawings" class="art-link">Drawings</a>
-            <!-- filter link -->
-            <a href="#" data-filter=".ui" class="art-link">UI Elements</a>
+            {%for category in categories%}
+                <!-- filter link -->
+                <a href="#" data-filter=".{{category.slug}}" class="art-link">{{category.cat_name}}</a>
+            {% endfor %}
         </div>
         <!-- filter end -->
 
@@ -31,13 +28,13 @@
         <!-- col end -->
 
         <div class="art-grid art-grid-2-col art-gallery">
-
+        {% for project in projects %}
         <!-- grid item -->
-        <div class="art-grid-item webTemplates">
+        <div class="art-grid-item {{project.slug}}">
             <!-- grid item frame -->
-            <a data-fancybox="gallery" href="/assets/img/works/original-size/1.jpg" class="art-a art-portfolio-item-frame art-horizontal">
+            <a data-fancybox="gallery" href="{{project.file_location}}" class="art-a art-portfolio-item-frame art-horizontal">
             <!-- img -->
-            <img src="/assets/img/works/thumbnail/1.jpg" alt="item">
+            <img src="{{project.file_location}}" alt="item">
             <!-- zoom icon -->
             <span class="art-item-hover"><i class="fas fa-expand"></i></span>
             </a>
@@ -45,16 +42,15 @@
             <!-- description -->
             <div class="art-item-description">
             <!-- title -->
-            <h5 class="mb-15">Project title</h5>
-            <div class="mb-15">Sit amet, consectetur adipisicing elit. Quas, architecto.</div>
+            <h5 class="mb-15">{{project.title}}</h5>
+            <div class="mb-15">{{project.description}}</div>
             <!-- button -->
-            <a href="/portfolio-single.html" class="art-link art-color-link art-w-chevron">Read more</a>
+            <a href="/portfolio/single?id={{project.id}}" class="art-link art-color-link art-w-chevron">Read more</a>
             </div>
             <!-- description end -->
-
         </div>
         <!-- grid item end -->
-
+        {% endfor %}
 
 
         </div>
@@ -63,6 +59,7 @@
     <!-- row end -->
 
     </div>
+    
     <!-- container end -->
 {% endblock %}
 
@@ -74,7 +71,7 @@
         <li class="menu-item current-menu-item"><a href="/">Home</a></li>
         <!-- menu item -->
         <li class="menu-item current-menu-item">
-            <a href="/Portfolio/show">Portfolio</a>
+            <a href="/Portfolio">Portfolio</a>
         </li>
         <!-- menu item -->
         <li class="menu-item"><a href="/History/show">History</a></li>

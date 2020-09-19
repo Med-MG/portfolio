@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use \Core\View;
-
+use App\Flash;
+use App\Models\ProjectModel;
 /**
  * Home controller
  *
@@ -19,7 +20,13 @@ class Portfolio extends \Core\Controller
      */
     public function showAction()
     {
-        View::renderTemplate('Portfolio/portfolio.html');
+        $projects = ProjectModel::fetchProjects();
+        $cat = ProjectModel::getcategories();        
+
+        View::renderTemplate('Portfolio/portfolio.html', [
+            "projects" => $projects,
+            "categories" => $cat
+        ]);
     }
 
 }

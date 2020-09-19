@@ -155,6 +155,11 @@ class ProjectModel extends \Core\Model
         }
     }
 
+    /**
+     * Update project data 
+     *
+     * @return bool true if project updated, false otherwise
+     */
     public static function updateData($data){
         try {
             $sql = "UPDATE `project` SET `title` = ?, `description` = ?, `order_date` = ?, `final_date` = ?, `location` = ?, `link` = ?, `category` = ? WHERE `project`.`id` = ?";
@@ -239,6 +244,7 @@ class ProjectModel extends \Core\Model
             }
     }
 
+
      /**
      * Insert Project details
      *
@@ -261,6 +267,27 @@ class ProjectModel extends \Core\Model
     }
 
 
+    /**
+     * Fetch all projects
+     *
+     * @return array return categories table data
+     */
+    public static function  fetchProjects()
+    {
+        try {
+
+        $sql = "SELECT pr.*, m.file_location, cat.cat_name,cat.slug FROM project pr LEFT join joinporfoliotable jp on pr.id = jp.project LEFT join media m on jp.image = m.id LEFT JOIN categories cat on pr.category = cat.id GROUP BY pr.id";
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+
+        } catch (PDOException $e) {
+                    echo 'query failed' . $e->getMessage();
+        }
+    }
 
     
 
