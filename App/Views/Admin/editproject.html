@@ -118,8 +118,13 @@
                     {% for image in images %}
                     <table  class='table table-condensed' image-upload-item='{{image.id}}'>
                         <tr>
-                            <td><img src='{{image.file_location}}' class='img-responsive' /></td>
-                            <td style='text-align:right;'><button type='button' value="{{image.id}}" id="imageDelete"
+                            <td>
+                                <input type="text" hidden value="{{image.file_name}}">
+                                <img src='{{image.file_location}}' class='img-responsive' />
+                            </td>
+                            <td style='text-align:right;'>
+
+                                <button type='button' value="{{image.id}}"  id="PopoverCustomT-1" data-toggle="modal" data-target="#exampleModal"
                                     class='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x btn btn-outline-danger'
                                     image-upload-item='{{image.id}}'><i
                                         class='pe-7s-trash btn-icon-wrapper'></i>Delete</button>
@@ -265,15 +270,30 @@
             }
         });
 
+        const delete_buttons = document.querySelectorAll('#PopoverCustomT-1');
+        for(const el of delete_buttons ){
+            el.addEventListener('click', (e) => {
+            let link = e.currentTarget.value;
+            let filename = e.currentTarget.parentNode.parentNode.children[0].children[0].value;
+            console.log(filename);
+            document.querySelector('.deletion_link').href = link;
+            $("#deletionBTN").attr('value',filename);
+            $("#exampleModal > div > div > div.modal-footer > a > button").attr('data-dismiss', 'modal');
+            });
+        }
+
         /* delete an image using ajax */
-        $("#imageDelete").on("click", function(){
+        $(".deletion_link").on("click", function(e){
             e.preventDefault();
-            var imageId = $("#imageDelete").val();
+            console.log('clicked');
+            var imageId = $(this).attr('href');
+            var imageName = $("#deletionBTN").attr('value');
+
             $.ajax({
                 type: "POST",
                 url: "/Project/deleteProjectImage",
                 dataType: "json",
-                data: {imageId:imageId},
+                data: {imageId:imageId, imageName:imageName},
                 success: function(data){
                     if(data.code == "200"){
                         toastr.success(data.msg);

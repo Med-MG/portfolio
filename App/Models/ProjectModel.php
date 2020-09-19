@@ -134,7 +134,20 @@ class ProjectModel extends \Core\Model
      *
      * @return bool true if image deleted, false otherwise
      */
+    public static function  deleteImage($id)
+    {
+        $sql = "DELETE m, jp FROM media m LEFT JOIN joinporfoliotable jp on m.id = jp.image WHERE m.id = ?";
 
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        if($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+
+    }
     /**
      * Insert Project details
      *

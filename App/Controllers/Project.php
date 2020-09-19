@@ -69,9 +69,9 @@ class Project extends Authenticated
                             
                         }
                         if($validator){
-                            print("<script>toastr.success($msg, 'success')</script>");
+                            print("<script>toastr.success('{$msg}', 'success');</script>");
                         }else {
-                            print("<script>toastr.error('Try again later', 'error')</script>");
+                            print("<script>toastr.error('Try again later', 'error');</script>");
                         }
 
                     }
@@ -100,6 +100,15 @@ class Project extends Authenticated
     {
         if(isset($_POST['imageId'])){
             
+            if(!unlink("./assets/images/".$_POST['imageName'])){
+                echo json_encode(['code'=>400, 'msg'=>"cannot delete image due to an error"]);
+            }else {
+                echo json_encode(['code'=>200, 'msg'=>"image has been deleted successfully"]);
+            }
+            $deleted = ProjectModel::deleteImage($_POST['imageId']);
+                // $old = getcwd() . DIRECTORY_SEPARATOR . "assets/images/".$_POST['imageName']; 
+                // echo json_encode(['code'=>200, 'msg'=> $old]);
+
         }else {
             throw new \Exception("There is no Image Id");
         }
