@@ -36,6 +36,7 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
+$router->add('portfolio', ['controller' => 'Portfolio', 'action' => 'show']);
 
 //routes with using var placeholders
 $router->add('{controller}/{action}');
