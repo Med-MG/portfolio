@@ -78,7 +78,7 @@ class ProjectModel extends \Core\Model
     {
         try {
 
-        $sql = "SELECT * FROM `project` WHERE id = ?";
+        $sql = "SELECT pr.*, cat.id as cat_id, cat_name FROM project pr join categories cat on pr.category = cat.id WHERE pr.id = ?";
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -97,7 +97,7 @@ class ProjectModel extends \Core\Model
     public static function  getimagesProject($id)
     {
         try {
-        $sql = "SELECT * FROM joinporfoliotable jp join project pr on jp.project = pr.id join media m on jp.image = m.id WHERE jp.project = ?";
+        $sql = "SELECT m.* FROM joinporfoliotable jp join project pr on jp.project = pr.id join media m on jp.image = m.id WHERE jp.project = ?";
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
@@ -129,6 +129,11 @@ class ProjectModel extends \Core\Model
 
     }
 
+    /**
+     * Delete project image from media an join table
+     *
+     * @return bool true if image deleted, false otherwise
+     */
 
     /**
      * Insert Project details

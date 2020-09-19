@@ -37,7 +37,14 @@ class Project extends Authenticated
 
     public function uploadAction()
     {      
-        $project = ProjectModel::save();
+        if(isset($_GET['idEdit'])){
+            $project = $_GET['idEdit'];
+            $msg = "Image added succefully";
+        } else{
+            $project = ProjectModel::save();
+            $msg = "Project added succefully";
+
+        }
         if($project !== false){
             if (UploadImages::countImages() > 0)
             {
@@ -55,16 +62,16 @@ class Project extends Authenticated
                             UploadImages::saveImage($image["tmp_name"], "assets/images/", $image["name"]);
 
                             /* save the image to database */
-                            $ImageId = ProjectModel::saveImage("assets/images/", $image["name"], $image["type"],$image["size"]);
+                            $ImageId = ProjectModel::saveImage("/assets/images/", $image["name"], $image["type"],$image["size"]);
 
                             /*  joined table image and project */
                             $validator = ProjectModel::joinImagesProject($project, $ImageId);
                             
                         }
                         if($validator){
-                            print("<script>toastr.success('project added', 'success')</script>");
+                            print("<script>toastr.success($msg, 'success')</script>");
                         }else {
-                            print("<script>toastr.error('project not added', 'error')</script>");
+                            print("<script>toastr.error('Try again later', 'error')</script>");
                         }
 
                     }
@@ -84,6 +91,19 @@ class Project extends Authenticated
 
     }
 
+    /**
+     * Delete a specific Project Image
+     *
+     * @return void
+    */
+    public function deleteProjectImageAction()
+    {
+        if(isset($_POST['imageId'])){
+            
+        }else {
+            throw new \Exception("There is no Image Id");
+        }
+    }
 
     /**
      * Display project to be managed
@@ -117,15 +137,34 @@ class Project extends Authenticated
     }
 
     /**
-     * Edit a project from database
+     * Get the editing page
      *
      * @return void
     */
     public function editAction(){
         $proj = ProjectModel::getoneProject($_GET['id']);
         $projectImages = ProjectModel::getimagesProject($_GET['id']);
-
+        $cat = ProjectModel::getcategories();
         View::renderTemplate('Admin/editproject.html', [
+            "categories" => $cat,
+            "project" => $proj,
+            "images" => $projectImages
+        ]);
+ 
+    }
+
+    /**
+     * Update project data database
+     *
+     * @return void
+    */
+
+    public function updateAction(){
+        $proj = ProjectModel::getoneProject($_GET['id']);
+        $projectImages = ProjectModel::getimagesProject($_GET['id']);
+        $cat = ProjectModel::getcategories();
+        View::renderTemplate('Admin/editproject.html', [
+            "categories" => $cat,
             "project" => $proj,
             "images" => $projectImages
         ]);
