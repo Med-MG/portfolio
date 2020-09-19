@@ -1,0 +1,363 @@
+{% extends "adminbase.html" %}
+{% block icon %}pe-7s-graph{% endblock %}
+{% block title %}New Project{% endblock %}
+{% block subtitle %} By submitting this form you will create new project {% endblock %}
+{% block innerbody %}
+<div class="row justify-content-xl-center">
+    <div class="col-md-8">
+        <div class="main-card mb-2 card">
+            <div class="card-body">
+                <h5 class="card-title">General Info</h5>
+                {% for proj in project %}
+                <form method="POST" id="formEdit" enctype="multipart/form-data" class="needs-validation" novalidate="">
+                    <input type="text" id="project_id" hidden value="{{proj.id}}">
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" placeholder="project title"
+                                value="{{proj.title}}" name="title" required="" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" id="location" placeholder="location"
+                                value="{{proj.location}}" name="location" required="" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="category">Category</label>
+                            <select type="select" id="category" name="category" required class="custom-select">
+                                <option value="{{proj.cat_id}}">{{proj.cat_name}}</option>
+                                {% for cat in categories %}
+                                <option value="{{cat.id}}">{{ cat.cat_name|e }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="description" class="">project short description</label>
+                            <textarea name="description" id="description" class="form-control"
+                                required="">{{proj.description}}</textarea>
+                        </div>
+                    </div>
+                    <h5 class="card-title">Date and time</h5>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="order_date">Order date</label>
+                            <input type="date" id="order_date" value="{{proj.order_date}}" class="form-control"
+                                name="order_date" required="">
+                            <div class="invalid-feedback">
+                                Please provide a valid date.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom04">final date</label>
+                            <input type="date" class="form-control" value="{{proj.final_date}}" id="final_date"
+                                name="final_date" required="">
+                            <div class="invalid-feedback">
+                                Please provide a valid time.
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="projectlink" class="">project link (optional)</label>
+                            <input type="text" class="form-control" value="{{proj.link}}" id="projectlink"
+                                placeholder="Link" name="projectlink" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <input class="btn btn-primary" id="btnEdit" type="submit" name="submit" value="Submit form">
+                </form>
+                
+                <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function () {
+                        "use strict";
+                        window.addEventListener(
+                            "load",
+                            function () {
+                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                var forms = document.getElementsByClassName("needs-validation");
+                                // Loop over them and prevent submission
+                                var validation = Array.prototype.filter.call(forms, function (
+                                    form
+                                ) {
+                                    form.addEventListener(
+                                        "submit",
+                                        function (event) {
+                                            if (form.checkValidity() === false) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+                                            }
+                                            form.classList.add("was-validated");
+                                        },
+                                        false
+                                    );
+                                });
+                            },
+                            false
+                        );
+                    })();
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="main-card mb-2 card">
+            <div class="card-body">
+                <h5 class="card-title">Uploaded Images</h5>
+                <div id="upload-preview">
+                    {% for image in images %}
+                    <table  class='table table-condensed' image-upload-item='{{image.id}}'>
+                        <tr>
+                            <td>
+                                <input type="text" hidden value="{{image.file_name}}">
+                                <img src='{{image.file_location}}' class='img-responsive' />
+                            </td>
+                            <td style='text-align:right;'>
+
+                                <button type='button' value="{{image.id}}"  id="PopoverCustomT-1" data-toggle="modal" data-target="#exampleModal"
+                                    class='mb-2 mr-2 btn-icon btn-shadow btn-outline-2x btn btn-outline-danger'
+                                    image-upload-item='{{image.id}}'><i
+                                        class='pe-7s-trash btn-icon-wrapper'></i>Delete</button>
+                            </td>
+                        </tr>
+                    </table>
+                    {% endfor %}
+
+                </div>
+                <form method="POST" id="form" enctype="multipart/form-data" class="needs-validation" novalidate="">
+                    <h5 class="card-title">project images</h5>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" id="idEdit" hidden value="{{proj.id}}">
+                        <span class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-focus">
+                            <i class="pe-7s-upload btn-icon-wrapper"></i>
+                            <span>Select file...</span>
+                            <!-- The file input field used as target for the file upload widget -->
+                            <input id="fileupload" multiple type="file" class="btn" name="files"
+                                accept="image/x-png, image/gif, image/jpeg"
+                                style="position: absolute;top: 0;opacity: 0;left: 0;" required="">
+                        </span>
+                        <!-- <input name="file" id="exampleFile" type="file" class="form-control-file"> -->
+                        <small class="form-text text-muted">This is some placeholder block-level help text for the above
+                            input. It's a bit lighter and easily wraps to a new line.</small>
+                    </div>
+                    <div id="toastr"></div>
+                    <input class="btn btn-primary" id="btn" type="submit" name="submit" value="Submit form">
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="/assets/js/uploadImages.js"></script>
+<script>
+    $(function () {
+
+        /* Check File API compatibility */
+        if (!$.fileReader()) {
+            alert("File API is not supported on your browser");
+        } else {
+            console.log("File API is supported on your browser");
+        }
+
+        /* createImage Event */
+        $(document).on("createImage", function (e) {
+            console.log(e.file.name);
+            console.log(e.file.size);
+            console.log(e.file.type);
+        });
+
+        /* deleteImage Event */
+        $(document).on("deleteImage", function (e) {
+            console.log(e.file.name);
+            console.log(e.file.size);
+            console.log(e.file.type);
+            /* if not there are images, the button is disabled */
+            if ($("#upload-preview").countImages() == 0) {
+                $("#btn").attr("disabled", "disabled");
+            }
+        });
+
+        /* Prevent form submit */
+        $("#form").on("submit", function (e) {
+            e.preventDefault();
+        });
+
+        /* Preview and Validate */
+        $("#form input[type='file']").on("change", function () {
+
+            $("#upload-preview").uploadImagesPreview("#form", {
+                image_type: "jpg|jpeg|png|gif",
+                min_size: 24,
+                max_size: (1024 * 1024 * 3),
+                /* 3 Mb */
+                max_files: 10
+            }, function () {
+                switch (__errors__upload__) /* Check the possibles erros */ {
+                    case 'ERROR_CONTENT_TYPE':
+                        alert("Error content type");
+                        break;
+                    case 'ERROR_MIN_SIZE':
+                        alert("Error min size");
+                        break;
+                    case 'ERROR_MAX_SIZE':
+                        alert("Error max size");
+                        break;
+                    case 'ERROR_MAX_FILES':
+                        alert("Error max files");
+                        break;
+                    default:
+                        $("#btn").removeAttr("disabled");
+                        break; /* Activate the button Form */
+                }
+            });
+        });
+
+        /* Send form */
+        $("#btn").on("click", function () {
+
+            /*images are required */
+            if ($("#upload-preview").countImages() > 0) {
+                $("#upload-preview").uploadImagesAjax("/project/upload", {
+                    params: {
+                        idEdit: $("#idEdit").val(),
+                    },
+                    /* Set the extra parameters here */
+                    beforeSend: function () {
+                        console.log("Sending ...");
+                    },
+                    success: function (data) {
+                        $("#toastr").html(data);
+                    },
+                    error: function (jqXHR, exception) {
+                        var msg = '';
+                        if (jqXHR.status === 0) {
+                            msg = 'Not connect.\n Verify Network.';
+                        } else if (jqXHR.status == 404) {
+                            msg = 'Requested page not found. [404]';
+                        } else if (jqXHR.status == 500) {
+                            msg = 'Internal Server Error [500].';
+                        } else if (exception === 'parsererror') {
+                            msg = 'Requested JSON parse failed.';
+                        } else if (exception === 'timeout') {
+                            msg = 'Time out error.';
+                        } else if (exception === 'abort') {
+                            msg = 'Ajax request aborted.';
+                        } else {
+                            msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                        }
+                        console.log(msg);
+                        $('#upload-preview').html('Uncaught Error.\n' + jqXHR.responseText);
+                    },
+                    complete: function () {
+                        console.log("Completed");
+                    }
+                });
+            } else { // The button is not activated
+                $(this).attr("disabled", "disabled");
+            }
+        });
+
+        const delete_buttons = document.querySelectorAll('#PopoverCustomT-1');
+        for(const el of delete_buttons ){
+            el.addEventListener('click', (e) => {
+            let link = e.currentTarget.value;
+            let filename = e.currentTarget.parentNode.parentNode.children[0].children[0].value;
+            console.log(filename);
+            document.querySelector('.deletion_link').href = link;
+            $("#deletionBTN").attr('value',filename);
+            $("#exampleModal > div > div > div.modal-footer > a > button").attr('data-dismiss', 'modal');
+            });
+        }
+
+        /* delete an image using ajax */
+        $(".deletion_link").on("click", function(e){
+            e.preventDefault();
+            console.log('clicked');
+            var imageId = $(this).attr('href');
+            var imageName = $("#deletionBTN").attr('value');
+
+            $.ajax({
+                type: "POST",
+                url: "/Project/deleteProjectImage",
+                dataType: "json",
+                data: {imageId:imageId, imageName:imageName},
+                success: function(data){
+                    if(data.code == "200"){
+                        toastr.success(data.msg);
+                    } else {
+                        toastr.error(data.msg);
+                    }
+
+                }
+
+            });
+        })
+        /* delete an image using ajax */
+        $("#btnEdit").on("click", function(e){
+            e.preventDefault();
+            let params = {
+                projectId: $("#project_id").val(),
+                title: $("#title").val(),
+                location: $("#location").val(),
+                category: $("#category").val(),
+                description: $("#description").val(),
+                order_date: $("#order_date").val(),
+                final_date: $("#final_date").val(),
+                projectlink: $("#projectlink").val()
+            }
+            
+            $.ajax({
+                type: "POST",
+                url: "/Project/updateProjectdata",
+                dataType: "json",
+                data: params,
+                beforeSend: function(){console.log("Sending ...");},
+				success: function(data){
+                    if(data.code == "200"){
+                        toastr.success(data.msg);
+                    } else {
+                        toastr.error(data.msg);
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    console.log(msg);
+
+                },
+				complete: function(){console.log("Completed");}
+
+
+            });
+        })
+    });
+</script>
+{% endblock %}

@@ -3,14 +3,7 @@
 {% block title %}Analytics Dashboard{% endblock %}
 {% block subtitle %} Lorem ipsum dolor sit amet consectetur adipisicing elit. {% endblock %}
 {% block innerbody %}
-{% for messages in flash_messages%}
-<div class="mbg-3 alert alert-{{messages.type}} alert-dismissible fade show" role="alert">
-    <span class="pr-2">
-        <i class="fa fa-question-circle"></i>
-    </span>
-    {{messages.body}}
-</div>
-{% endfor %}
+
 <div class="row">
     <div class="col-md-6 col-lg-3">
         <div
