@@ -22,7 +22,7 @@ class Project extends Authenticated
 
     public function newAction()
     {
-        $cat = ProjectModel::getcategories();
+        $cat = ProjectModel::getcategories();        
         View::renderTemplate('Admin/newproject.html', [
             "categories" => $cat
         ]);
@@ -84,10 +84,14 @@ class Project extends Authenticated
 
     }
 
-    public function managecategoriesAction(){
+    public function manageAction(){
         $proj = ProjectModel::getProject();
-        View::renderTemplate('Admin/managecategories.html', [
-            "project" => $proj
+        foreach ($proj as $key => $project) {
+            $proj[$key]->order_date = date("F jS, Y, g:i a", strtotime($project->order_date));
+            $proj[$key]->final_date = date("F jS, Y, g:i a", strtotime($project->final_date));
+        }
+        View::renderTemplate('Admin/manageproject.html', [
+            "projects" => $proj
         ]);
     }
     

@@ -51,7 +51,7 @@ class ProjectModel extends \Core\Model
      */
     public static function  getProject()
     {
-        $sql = "SELECT * FROM project pr join categories cat on pr.category = cat.id";
+        $sql = "SELECT pr.*, cat.cat_name FROM project pr join categories cat on pr.category = cat.id";
 
         $db = static::getDB();
         $stmt = $db->prepare($sql);
