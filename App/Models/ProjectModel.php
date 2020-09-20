@@ -197,7 +197,7 @@ class ProjectModel extends \Core\Model
             $Client = trim($_GET['Client']);
             $link =trim($_GET['projectlink']);
             $category = trim($_GET['category']);
-            $sql = "INSERT INTO `project` (`title`, `description`, `order_date`, `final_date`, `location`,`Client`, `link`, `category` ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO `project` (`title`, `description`, `order_date`, `final_date`, `location`,`Client`, `link`, `category` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
