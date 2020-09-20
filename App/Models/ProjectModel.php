@@ -162,11 +162,11 @@ class ProjectModel extends \Core\Model
      */
     public static function updateData($data){
         try {
-            $sql = "UPDATE `project` SET `title` = ?, `description` = ?, `order_date` = ?, `final_date` = ?, `location` = ?, `link` = ?, `category` = ? WHERE `project`.`id` = ?";
+            $sql = "UPDATE `project` SET `title` = ?, `description` = ?, `order_date` = ?, `final_date` = ?, `location` = ?,`Client` = ?, `link` = ?, `category` = ? WHERE `project`.`id` = ?";
     
             $db = static::getDB();
             $stmt = $db->prepare($sql);
-            $stmt->execute([$_POST['title'], $_POST['description'], $_POST['order_date'], $_POST['final_date'], $_POST['location'], $_POST['projectlink'], $_POST['category'], $_POST['projectId']]);
+            $stmt->execute([trim($_POST['title']), trim($_POST['description']), trim($_POST['order_date']), trim($_POST['final_date']), trim($_POST['location']), trim($_POST['Client']), trim($_POST['projectlink']), trim($_POST['category']), $_POST['projectId']]);
                 if($stmt->rowCount() > 0) {
                     return true;
                 }else{
@@ -194,13 +194,14 @@ class ProjectModel extends \Core\Model
             $order_date = trim($_GET['order_date']);
             $final_date = trim($_GET['final_date']);
             $location = trim($_GET['location']);
+            $Client = trim($_GET['Client']);
             $link =trim($_GET['projectlink']);
             $category = trim($_GET['category']);
-            $sql = "INSERT INTO `project` (`title`, `description`, `order_date`, `final_date`, `location`, `link`, `category` ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO `project` (`title`, `description`, `order_date`, `final_date`, `location`,`Client`, `link`, `category` ) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $db = static::getDB();
             $stmt = $db->prepare($sql);
-            $stmt->execute([$title, $description, $order_date, $final_date, $location, $link, $category]);
+            $stmt->execute([$title, $description, $order_date, $final_date, $location,$Client, $link, $category]);
             if($stmt->rowCount() > 0){
                 return $db->lastInsertId();
             }else{

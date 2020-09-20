@@ -32,7 +32,7 @@
         <!-- grid item -->
         <div class="art-grid-item {{project.slug}}">
             <!-- grid item frame -->
-            <a data-fancybox="gallery" href="{{project.file_location}}" class="art-a art-portfolio-item-frame art-horizontal">
+            <a data-fancybox="gallery" data-src="{{project.file_location}}" class="art-a art-portfolio-item-frame art-horizontal">
             <!-- img -->
             <img src="{{project.file_location}}" alt="item">
             <!-- zoom icon -->
@@ -45,7 +45,7 @@
             <h5 class="mb-15">{{project.title}}</h5>
             <div class="mb-15">{{project.description}}</div>
             <!-- button -->
-            <a href="/portfolio/single?id={{project.id}}" class="art-link art-color-link art-w-chevron">Read more</a>
+            <a href="/Project/single?id={{project.id}}" class="art-link art-color-link art-w-chevron">Read more</a>
             </div>
             <!-- description end -->
         </div>

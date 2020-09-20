@@ -40,6 +40,7 @@ $router->add('portfolio', ['controller' => 'Portfolio', 'action' => 'show']);
 $router->add('contact', ['controller' => 'Contact', 'action' => 'show']);
 $router->add('history', ['controller' => 'History', 'action' => 'show']);
 $router->add('onepage', ['controller' => 'Onepage', 'action' => 'show']);
+$router->add('/project/single', ['controller' => 'Project', 'action' => 'single']);
 
 //routes with using var placeholders
 $router->add('{controller}/{action}');

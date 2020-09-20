@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Single project{% endblock %}
+
+{% block body %}
+    <!-- container -->
+    <div class="container-fluid">
+
+    <!-- row -->
+    <div class="row p-30-0">
+
+        <!-- col -->
+        <div class="col-lg-12">
+
+        <!-- section title -->
+        <div class="art-section-title">
+            <!-- title frame -->
+            <div class="art-title-frame">
+            <!-- title -->
+            <h4>Project title</h4>
+            </div>
+            <!-- title frame end -->
+            {% for proj in project %}
+            <!-- right frame -->
+            <div class="art-right-frame">
+            <div class="art-project-category">{{proj.cat_name}}</div>
+            </div>
+            <!-- right frame end -->
+            {% endfor %}
+        </div>
+        <!-- section title end -->
+
+        </div>
+        <!-- col end -->
+
+        <!-- col -->
+        <div class="col-lg-12">
+
+        <!-- slider container -->
+        <div class="swiper-container art-works-slider" style="overflow: visible">
+            <!-- slider wrapper -->
+            <div class="swiper-wrapper">
+            {% for image in images %}
+                <!-- slide -->
+                <div class="swiper-slide">
+                    <!-- item frame -->
+                    <a data-fancybox="gallery" data-src="{{image.file_location}}" class="art-a art-portfolio-item-frame art-horizontal">
+                    <!-- img -->
+                    <img src="{{image.file_location}}" alt="item">
+                    <!-- zoom icon -->
+                    <span class="art-item-hover"><i class="fas fa-expand"></i></span>
+                    </a>
+                    <!-- item end -->
+                </div>
+                <!-- slide end -->
+            {% endfor %} 
+            </div>
+            <!-- slider wrapper end -->
+        </div>
+        <!-- slider container end -->
+
+        </div>
+        <!-- col end -->
+
+        <!-- col -->
+        <div class="col-lg-12">
+
+        <!-- slider navigation -->
+        <div class="art-slider-navigation">
+
+            <!-- left side -->
+            <div class="art-sn-left">
+
+            <!-- slider pagination -->
+            <div class="swiper-pagination"></div>
+
+            </div>
+            <!-- left side end -->
+
+            <!-- right side -->
+            <div class="art-sn-right">
+
+            <!-- slider navigation -->
+            <div class="art-slider-nav-frame">
+                <!-- prev -->
+                <div class="art-slider-nav art-works-swiper-prev"><i class="fas fa-chevron-left"></i></div>
+                <!-- next -->
+                <div class="art-slider-nav art-works-swiper-next"><i class="fas fa-chevron-right"></i></div>
+            </div>
+            <!-- slider navigation -->
+
+            </div>
+            <!-- right side end -->
+
+        </div>
+        <!-- slider navigation end -->
+
+        </div>
+        <!-- col end -->
+
+    </div>
+    <!-- row end -->
+
+    </div>
+    <!-- container end -->
+
+    <!-- container projectDetails-->
+    {% include 'inc/projectDetails.html' %}
+    <!-- container projectDetails end -->
+
+    <!-- container testimonial-->
+    {% include 'inc/testimonial.html' %}
+    <!-- container testimonial end -->
+    
+    <!-- container counter-->
+    {% include 'inc/counter.html' %}
+    <!-- container counter end -->
+
+    <!-- container orderProject-->
+    {% include 'inc/orderProject.html' %}
+    <!-- container orderProject end -->
+
+    
+
+{% endblock %}
+
+
+{% block menu %}
+    <!-- menu list -->
+    <ul class="main-menu">
+        <!-- menu item -->
+        <li class="menu-item"><a href="/">Home</a></li>
+        <!-- menu item -->
+        <li class="menu-item current-menu-item">
+            <a href="/Portfolio">Portfolio</a>
+        </li>
+        <!-- menu item -->
+        <li class="menu-item"><a href="/history">History</a></li>
+        <!-- menu item -->
+        <li class="menu-item"><a href="/contact">Contact</a></li>
+        <!-- menu item -->
+        <!-- <li class="menu-item">
+            <a href="/Blog/show">Blog</a>
+        </li> -->
+        <!-- menu item -->
+        <li class="menu-item"><a href="/Onepage/show" target="_blank">Onepage</a></li>
+    </ul>
+    <!-- menu list end -->
+{% endblock %}

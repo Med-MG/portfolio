@@ -12,7 +12,7 @@
                 <form method="POST" id="formEdit" enctype="multipart/form-data" class="needs-validation" novalidate="">
                     <input type="text" id="project_id" hidden value="{{proj.id}}">
                     <div class="form-row">
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" placeholder="project title"
                                 value="{{proj.title}}" name="title" required="" />
@@ -21,7 +21,15 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="Client">Client</label>
+                            <input type="text" class="form-control" id="Client" placeholder="Client"
+                                value="{{proj.Client}}" name="Client" required="" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
                             <label for="location">Location</label>
                             <input type="text" class="form-control" id="location" placeholder="location"
                                 value="{{proj.location}}" name="location" required="" />
@@ -30,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="category">Category</label>
                             <select type="select" id="category" name="category" required class="custom-select">
                                 <option value="{{proj.cat_id}}">{{proj.cat_name}}</option>
@@ -315,6 +323,7 @@
                 projectId: $("#project_id").val(),
                 title: $("#title").val(),
                 location: $("#location").val(),
+                Client: $("#Client").val(),
                 category: $("#category").val(),
                 description: $("#description").val(),
                 order_date: $("#order_date").val(),

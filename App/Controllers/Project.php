@@ -277,5 +277,30 @@ class Project extends Authenticated
         }
     }
 
+    /**
+     * Display project 
+     *
+     * @return void
+    */
+    public function singleAction(){
+        if(isset($_GET['id'])){
+            $project = ProjectModel::getoneProject($_GET['id']);
+            $images = ProjectModel::getimagesProject($_GET['id']);
+            foreach ($project as $key => $proj) {
+                $project[$key]->order_date = date("F jS, Y", strtotime($proj->order_date));
+                $project[$key]->final_date = date("F jS, Y", strtotime($proj->final_date));
+            }
+        }else {
+            throw new \Exception('parameters not found');
+        }
+
+        View::renderTemplate('Portfolio/singleproject.html', [
+            "project" => $project,
+            "images" => $images
+        ]);
+
+
+    }
+
 
 }
