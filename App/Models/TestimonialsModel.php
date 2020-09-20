@@ -7,12 +7,29 @@ use \Core\View;
 
 class TestimonialsModel extends \Core\Model
 {
-        /**
-     * Insert Project details
+
+     /**
+     * Fetch all testimonial details
      *
-     * array of data to insert in the project table
+     * @return array Testimonials 
+     */
+    public static function getAll(){
+        try {
+            $sql = "SELECT t.*, m.file_name,m.file_location FROM testimonials t LEFT JOIN media m on t.image = m.id";
+
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+    
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+                    echo 'query failed' . $e->getMessage();
+        }
+    }
+    /**
+     * Insert Testimonia details
      *
-     * @return mixed User object if found, false otherwise
+     * @return bool true if Testimonial added, false otherwise
      */
     public static function create($data, $imgId)
     {
@@ -36,5 +53,28 @@ class TestimonialsModel extends \Core\Model
             echo 'query failed' . $e->getMessage();
         }
 
+    }
+
+    /**
+     * Delete testimonial
+     *
+     * @return bool true if deleted, false otherwise
+     */
+    public static function  deleteOne($id)
+    {
+        try {
+        $sql = "DELETE t, m FROM testimonials t LEFT join media m on t.image = m.id WHERE t.id =  ?";
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$id]);
+        if($stmt->rowCount() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+        } catch (PDOException $e) {
+            echo 'query failed' . $e->getMessage();
+        }
     }
 }

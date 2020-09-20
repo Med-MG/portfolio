@@ -78,7 +78,36 @@ class Testimonials extends Authenticated
      */
     public function manageAction()
     {
-         
-        View::renderTemplate('Admin/Testimonials/manageTestimonial.html');
+        $testimonials = TestimonialsModel::getAll();
+        foreach ($testimonials as $key => $testimonial) {
+            $testimonials[$key]->recommendation = $this->strWordCut($testimonial->recommendation,38);
+        }
+        View::renderTemplate('Admin/Testimonials/manageTestimonial.html', [
+            "testimonials" => $testimonials
+        ]);
+    }
+    /**
+     * Delete testimonial  
+     *
+     * @return void
+     */
+    public function deleteAction()
+    {
+        if(!empty($_GET)){
+            $delTesimonial = TestimonialsModel::deleteOne($_GET['id']);
+            if($delTesimonial){
+                unlink("./assets/images/".$_GET['image']);
+                Flash::addMessage('Testimonnial deleted');
+            }else{
+                Flash::addMessage('Testimonial is not deleted, please try again', Flash::WARNING);
+
+            }
+        }else {
+            Flash::addMessage('Parameter is empty, please try again', Flash::WARNING);
+
+        }
+        $this->redirect('/Testimonials/manage');
+
+
     }
 }

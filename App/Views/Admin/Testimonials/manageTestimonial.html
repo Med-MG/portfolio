@@ -14,22 +14,20 @@
                             <th class="text-center">#</th>
                             <th>Full Name</th>
                             <th class="text-center">Occupation</th>
-                            <th class="text-center">Description</th>
+                            <th class="text-center">recommendation</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        <!-- {% for project in projects%}
+                        {% for testimonial in testimonials %}
                         <tr>
-                            <td class="text-center text-muted">{{project.id}}</td>
-                            <td class=""> {{project.title}} </td>
-                            <td class="text-center"> {{project.location}} </td>
-                            <td class="text-center"> {{project.cat_name}} </td>
-                            <td class="text-center"> {{project.order_date}} </td>
-                            <td class="text-center"> {{project.final_date}}</td>
+                            <td class="text-center text-muted">{{testimonial.id}}</td>
+                            <td class=""> {{testimonial.full_name}} </td>
+                            <td class="text-center"> {{testimonial.occupation}} </td>
+                            <td class="text-center"> {{testimonial.recommendation}} </td>
                             <td class="text-center">
-                                <a href="/Project/edit?id={{project.id}}">
+                                <a href="/Testimonials/edit?id={{testimonial.id}}">
                                     <button type="button" id="PopoverCustomT-1"
                                         class=" btn-wide btn btn-success btn-icon-only">
                                         <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
@@ -37,13 +35,13 @@
                                 </a>
                                 <button type="button" id="PopoverCustomT-1"
                                     class=" btn-icon btn-icon-only btn btn-outline-danger"
-                                    value="/Project/delete?id={{project.id}}" data-toggle="modal"
+                                    value="/Testimonials/delete?id={{testimonial.id}}&image={{testimonial.file_name}}" data-toggle="modal"
                                     data-target="#exampleModal">
                                     <i class="pe-7s-trash" style="font-size: 1rem;"></i>
                                 </button>
                             </td>
                         </tr>
-                        {% endfor %} -->
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
