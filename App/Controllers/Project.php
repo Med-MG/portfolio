@@ -214,6 +214,27 @@ class Project extends Authenticated
         View::renderTemplate('Admin/managecategories.html', [
             "categories" => $cat
         ]);
+    }
+    /**
+     * Add a new category
+     *
+     * @return void
+    */
+    public function addCategoryAction()
+    {
+        if(!empty($_POST)){
+            $addcat = ProjectModel::addCategory($_POST);        
 
+        }else{
+            echo json_encode(['code'=>400, 'msg'=>"No data sent"]);
+
+        }
+        if($addcat){
+            echo json_encode(['code'=>200, 'msg'=>"category added successfully"]);
+
+        }else{
+            echo json_encode(['code'=>400, 'msg'=>"cannot add category due to an error"]);
+
+        }
     }
 }

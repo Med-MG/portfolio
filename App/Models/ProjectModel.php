@@ -289,7 +289,32 @@ class ProjectModel extends \Core\Model
         }
     }
 
+    //** Section for handling categories */
+
+    /**
+     * Add new category to database
+     *
+     * @return array return categories table data
+     */
+    public static function addCategory($data){
+        try {
+
+            $sql = "INSERT INTO `categories` (`id`, `cat_name`, `slug`, `timestamp`) VALUES (NULL, ?, ?, CURRENT_TIMESTAMP)";
     
+            $db = static::getDB();
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$data['cat_title'],$data['cat_slug']]);
+    
+            if($stmt->rowCount() > 0) {
+                return true;
+            }else{
+                return false;
+            }
+    
+            } catch (PDOException $e) {
+                        echo 'query failed' . $e->getMessage();
+            }
+    }
 
 }
 
