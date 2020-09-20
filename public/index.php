@@ -37,6 +37,9 @@ $router->add('dashboard', ['controller' => 'Project', 'action' => 'manage']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('portfolio', ['controller' => 'Portfolio', 'action' => 'show']);
+$router->add('contact', ['controller' => 'Contact', 'action' => 'show']);
+$router->add('history', ['controller' => 'History', 'action' => 'show']);
+$router->add('onepage', ['controller' => 'Onepage', 'action' => 'show']);
 
 //routes with using var placeholders
 $router->add('{controller}/{action}');
