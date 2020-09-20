@@ -117,7 +117,7 @@
                 <h5 class="card-title">Uploaded Images</h5>
                 <div id="upload-preview">
                     {% for image in images %}
-                    <table  class='table table-condensed' image-upload-item='{{image.id}}'>
+                    <table  class='table table-condensed' id="img{{image.id}}" image-upload-item='{{image.id}}'>
                         <tr>
                             <td>
                                 <input type="text" hidden value="{{image.file_name}}">
@@ -298,6 +298,8 @@
                 success: function(data){
                     if(data.code == "200"){
                         toastr.success(data.msg);
+                        $("#img"+imageId).fadeOut();
+
                     } else {
                         toastr.error(data.msg);
                     }

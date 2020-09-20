@@ -23,7 +23,7 @@ class Project extends Authenticated
     public function newAction()
     {
         $cat = ProjectModel::getcategories();        
-        View::renderTemplate('Admin/newproject.html', [
+        View::renderTemplate('Admin/projects/newproject.html', [
             "categories" => $cat
         ]);
     }
@@ -126,7 +126,7 @@ class Project extends Authenticated
             $proj[$key]->order_date = date("F jS, Y", strtotime($project->order_date));
             $proj[$key]->final_date = date("F jS, Y", strtotime($project->final_date));
         }
-        View::renderTemplate('Admin/manageproject.html', [
+        View::renderTemplate('Admin/projects/manageproject.html', [
             "projects" => $proj
         ]);
     }
@@ -157,7 +157,7 @@ class Project extends Authenticated
         $proj = ProjectModel::getoneProject($_GET['id']);
         $projectImages = ProjectModel::getimagesProject($_GET['id']);
         $cat = ProjectModel::getcategories();
-        View::renderTemplate('Admin/editproject.html', [
+        View::renderTemplate('Admin/projects/editproject.html', [
             "categories" => $cat,
             "project" => $proj,
             "images" => $projectImages
@@ -165,24 +165,24 @@ class Project extends Authenticated
  
     }
 
-    /**
-     * Fetch and display project data to be updated
-     *
-     * @return void
-    */
+    // /**
+    //  * Fetch and display project data to be updated
+    //  *
+    //  * @return void
+    // */
 
-    public function updateAction()
-    {
-        $proj = ProjectModel::getoneProject($_GET['id']);
-        $projectImages = ProjectModel::getimagesProject($_GET['id']);
-        $cat = ProjectModel::getcategories();
-        View::renderTemplate('Admin/editproject.html', [
-            "categories" => $cat,
-            "project" => $proj,
-            "images" => $projectImages
-        ]);
+    // public function updateAction()
+    // {
+    //     $proj = ProjectModel::getoneProject($_GET['id']);
+    //     $projectImages = ProjectModel::getimagesProject($_GET['id']);
+    //     $cat = ProjectModel::getcategories();
+    //     View::renderTemplate('Admin/projects/editproject.html', [
+    //         "categories" => $cat,
+    //         "project" => $proj,
+    //         "images" => $projectImages
+    //     ]);
  
-    }
+    // }
 
     /**
      * Update project data in database
@@ -216,7 +216,7 @@ class Project extends Authenticated
                 unset($cat[$key]);
             }
         }
-        View::renderTemplate('Admin/managecategories.html', [
+        View::renderTemplate('Admin/projects/managecategories.html', [
             "categories" => $cat
         ]);
     }
