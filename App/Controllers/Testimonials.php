@@ -142,7 +142,7 @@ class Testimonials extends Authenticated
     {
         $msg="";
         if(!empty($_POST)){
-            if(!empty($_FILES)){
+            if(!empty($_FILES['files']['name'])){
                             /* Validate */
                 if (UploadImages::validateImages(false))
                 {
