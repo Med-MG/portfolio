@@ -1,0 +1,87 @@
+{% extends "adminbase.html" %}
+{% block icon %}pe-7s-graph{% endblock %}
+{% block title %}New Testimonial{% endblock %}
+{% block subtitle %} By submitting this form you will create new Testimonial {% endblock %}
+{% block innerbody %}
+<div class="row justify-content-xl-center">
+    <div class="col-md-8">
+        <div class="main-card mb-2 card">
+            <div class="card-body">
+                <h5 class="card-title">General Info</h5>
+                <form method="POST" id="form" enctype="multipart/form-data" action="/Testimonials/create" class="needs-validation" novalidate="" >
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="full_name">Name</label>
+                            <input type="text" class="form-control" id="full_name" placeholder="full name" name="full_name" required="" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="occupation">Occupation</label>
+                            <input type="text" class="form-control" id="occupation" placeholder="occupation" name="occupation" required="" />
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="description" class="">recommendation</label>
+                            <textarea name="description" id="description" class="form-control" required="" ></textarea>
+                        </div>
+                    </div>
+                    <h5 class="card-title">project images</h5>
+                    <div class="col-md-6 mb-3">
+                        <span class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-focus">
+                            <i class="pe-7s-upload btn-icon-wrapper"></i>
+                            <span>Select file...</span>
+                                <!-- The file input field used as target for the file upload widget -->
+                            <input id="fileupload" type="file" class="btn" name="files" accept="image/x-png, image/gif, image/jpeg" style="position: absolute;top: 0;opacity: 0;left: 0;" required="">
+                        </span>
+                        <!-- <input name="file" id="exampleFile" type="file" class="form-control-file"> -->
+                        <small class="form-text text-muted">Please add a photo of the person how have written the review</small>
+                    </div>
+                    <input class="btn btn-primary" id="btn" type="submit" name="submit" value="Submit form">
+                </form>
+    
+                <script>
+                    // Example starter JavaScript for disabling form submissions if there are invalid fields
+                    (function () {
+                        "use strict";
+                        window.addEventListener(
+                            "load",
+                            function () {
+                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                var forms = document.getElementsByClassName("needs-validation");
+                                // Loop over them and prevent submission
+                                var validation = Array.prototype.filter.call(forms, function (
+                                    form
+                                ) {
+                                    form.addEventListener(
+                                        "submit",
+                                        function (event) {
+                                            if (form.checkValidity() === false) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+                                            }
+                                            form.classList.add("was-validated");
+                                        },
+                                        false
+                                    );
+                                });
+                            },
+                            false
+                        );
+                    })();
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+</script>
+{% endblock %}

@@ -88,6 +88,27 @@ class uploadImages{
 		}
 		return $images;
 	}
+	/**
+     * This method returns an array of images data
+     *
+     * @return array returns an array or images
+     */
+	public static function getImage()
+	{
+		$images = array();
+		foreach ($_FILES as $file)
+		{
+				$images[] = array(
+				"name" => $file["name"], 
+				"size"=> $file["size"],
+				"tmp_name" => $file["tmp_name"],
+				"type" => $file["type"],
+				"error" => $file["error"]
+				);
+		}
+		
+		return $images;
+	}
     /**
      * This method returns an array of paramaters
      *
@@ -121,9 +142,14 @@ class uploadImages{
      * 
      * @return bool
      */
-	public static function validateImages()
+	public static function validateImages($multiple=true)
 	{
-		$images = static::getImages();
+		if($multiple == true){
+			$images = static::getImages();
+
+		}else {
+			$images = static::getImage();
+		}
         
 		
 		foreach ($images as $image)

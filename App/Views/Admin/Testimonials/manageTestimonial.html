@@ -1,28 +1,26 @@
 {% extends "adminbase.html" %}
 {% block icon %}pe-7s-graph{% endblock %}
-{% block title %}Manage Project{% endblock %}
-{% block subtitle %} Here you can manage your projects {% endblock %}
+{% block title %}Manage Testimonials{% endblock %}
+{% block subtitle %} Here you can manage your Testimonials {% endblock %}
 {% block innerbody %}
 <div class="row">
     <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-header">Projects list</div>
+            <div class="card-header">Testimonials list</div>
             <div class="table-responsive">
                 <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th>Project Name</th>
-                            <th class="text-center">Project location</th>
-                            <th class="text-center">Category</th>
-                            <th class="text-center">Start date</th>
-                            <th class="text-center">End date</th>
+                            <th>Full Name</th>
+                            <th class="text-center">Occupation</th>
+                            <th class="text-center">Description</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        {% for project in projects%}
+                        <!-- {% for project in projects%}
                         <tr>
                             <td class="text-center text-muted">{{project.id}}</td>
                             <td class=""> {{project.title}} </td>
@@ -45,7 +43,7 @@
                                 </button>
                             </td>
                         </tr>
-                        {% endfor %}
+                        {% endfor %} -->
                     </tbody>
                 </table>
             </div>

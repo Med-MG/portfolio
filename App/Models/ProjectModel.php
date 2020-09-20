@@ -189,13 +189,13 @@ class ProjectModel extends \Core\Model
         try {
             
         if(!empty($_GET)){
-            $title = $_GET['title'];
-            $description = $_GET['description'];
-            $order_date = $_GET['order_date'];
-            $final_date = $_GET['final_date'];
-            $location = $_GET['location'];
-            $link = $_GET['projectlink'];
-            $category = $_GET['category'];
+            $title = trim($_GET['title']);
+            $description = trim($_GET['description']);
+            $order_date = trim($_GET['order_date']);
+            $final_date = trim($_GET['final_date']);
+            $location = trim($_GET['location']);
+            $link =trim($_GET['projectlink']);
+            $category = trim($_GET['category']);
             $sql = "INSERT INTO `project` (`title`, `description`, `order_date`, `final_date`, `location`, `link`, `category` ) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $db = static::getDB();
