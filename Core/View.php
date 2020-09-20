@@ -49,6 +49,7 @@ class View
             $twig->addGlobal('admin', \App\Auth::getUser());
             $twig->addGlobal('flash_messages', \App\Flash::getMessages());
             $twig->addGlobal('personal_info', \App\Controllers\Home::getPersonalInfo());
+            $twig->addGlobal('testimonials', \App\Models\TestimonialsModel::getAll());
             
 
         }
