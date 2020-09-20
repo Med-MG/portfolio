@@ -81,6 +81,7 @@ class Testimonials extends Authenticated
         $testimonials = TestimonialsModel::getAll();
         foreach ($testimonials as $key => $testimonial) {
             $testimonials[$key]->recommendation = $this->strWordCut($testimonial->recommendation,38);
+            $testimonials[$key]->timestamp = date("F jS, Y", strtotime($testimonial->timestamp));
         }
         View::renderTemplate('Admin/Testimonials/manageTestimonial.html', [
             "testimonials" => $testimonials
@@ -109,5 +110,86 @@ class Testimonials extends Authenticated
         $this->redirect('/Testimonials/manage');
 
 
+    }
+
+    /**
+     * Display Editing  page
+     *
+     * @return void
+     */
+    public function editAction()
+    {
+        if(!empty($_GET)){
+            $testimonial = TestimonialsModel::getOne($_GET['id']);
+        }else {
+            Flash::addMessage('Parameter is empty, please try again', Flash::WARNING);
+            $this->redirect('/Testimonials/manage');
+
+        }
+        
+        View::renderTemplate('Admin/Testimonials/newTestimonial.html', [
+            "testimonial" => $testimonial
+        ]);
+    }
+
+    /**
+     * UpdateCreate testimonials
+     *
+     * @return void
+     */
+
+    public function updateAction()
+    {
+        $msg="";
+        if(!empty($_POST)){
+            if(!empty($_FILES)){
+                            /* Validate */
+                if (UploadImages::validateImages(false))
+                {
+                    
+                    /* images array */
+                    $images = UploadImages::getImage();
+                    foreach ($images as $image)
+                    {
+                        
+                        /* save the image to assets/images folder */
+                        UploadImages::saveImage($image["tmp_name"], "assets/images/", $image["name"]);
+
+                        /* save the image to database */
+                        $ImageId = ProjectModel::saveImage("/assets/images/", $image["name"], $image["type"],$image["size"]);
+
+                        $updateTestimonial = TestimonialsModel::Update($_POST,$ImageId);
+                        if(TestimonialsModel::delImage($_POST['imageid'])){
+                            if(!unlink("./assets/images/".$_POST['imageName'])){
+                                $msg = "image not found on the server";
+                            }
+                            
+                        }
+                        
+                        
+                    }
+
+
+                    
+                }
+                else /* Show errors array */
+                {
+                    print_r(UploadImages::$error);
+                }
+            } else{
+                $updateTestimonial = TestimonialsModel::Update($_POST,$_POST['imageid']);
+
+            }
+
+        }
+
+        if($updateTestimonial){
+            Flash::addMessage('Testimonnial updated  successfully'. $msg);
+
+        }else {
+            Flash::addMessage('Testimonnial error, please try again' . $msg, Flash::WARNING);
+            
+        }
+        $this->redirect('/Testimonials/manage');
     }
 }

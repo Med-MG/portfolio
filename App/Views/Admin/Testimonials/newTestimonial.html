@@ -8,6 +8,48 @@
         <div class="main-card mb-2 card">
             <div class="card-body">
                 <h5 class="card-title">General Info</h5>
+                {% if testimonial %}
+                {% for testimo in testimonial%}
+                    <form method="POST" id="form" enctype="multipart/form-data" action="/Testimonials/update" class="needs-validation" novalidate="" >
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label for="full_name">Name</label>
+                                <input type="text" hidden value="{{testimo.id}}" name="testimonialId">
+                                <input type="text" class="form-control" id="full_name" value="{{testimo.full_name}}" placeholder="full name" name="full_name" required="" />
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="occupation">Occupation</label>
+                                <input type="text" class="form-control" id="occupation" value="{{testimo.occupation}}" placeholder="occupation" name="occupation" required="" />
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label for="description" class="">recommendation</label>
+                                <textarea name="description" id="description" class="form-control" required="" >{{testimo.recommendation}}"</textarea>
+                            </div>
+                        </div>
+                        <h5 class="card-title">project images</h5>
+                        <input type="text" hidden value="{{testimo.imageid}}" name="imageid">
+                        <input type="text" hidden value="{{testimo.file_name}}" name="imageName">
+                        <div class="col-md-6 mb-3">
+                            <span class="mb-2 mr-2 btn-icon btn-icon-only btn-shadow btn-dashed btn btn-outline-focus">
+                                <i class="pe-7s-upload btn-icon-wrapper"></i>
+                                <span>Select file...</span>
+                                    <!-- The file input field used as target for the file upload widget -->
+                                <input id="fileupload" type="file" class="btn" name="files" accept="image/x-png, image/gif, image/jpeg" style="position: absolute;top: 0;opacity: 0;left: 0;">
+                            </span>
+                            <!-- <input name="file" id="exampleFile" type="file" class="form-control-file"> -->
+                            <small class="form-text text-muted">Please add a photo of the person how have written the review</small>
+                        </div>
+                        <input class="btn btn-primary" id="btn" type="submit" name="submit" value="Submit form">
+                    </form>
+                {% endfor %}
+                {% else %}
                 <form method="POST" id="form" enctype="multipart/form-data" action="/Testimonials/create" class="needs-validation" novalidate="" >
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
@@ -43,6 +85,8 @@
                     </div>
                     <input class="btn btn-primary" id="btn" type="submit" name="submit" value="Submit form">
                 </form>
+                {% endif %}
+
     
                 <script>
                     // Example starter JavaScript for disabling form submissions if there are invalid fields
