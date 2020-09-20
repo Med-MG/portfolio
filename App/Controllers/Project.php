@@ -119,7 +119,8 @@ class Project extends Authenticated
      *
      * @return void
     */
-    public function manageAction(){
+    public function manageAction()
+    {
         $proj = ProjectModel::getProject();
         foreach ($proj as $key => $project) {
             $proj[$key]->order_date = date("F jS, Y, g:i a", strtotime($project->order_date));
@@ -134,7 +135,8 @@ class Project extends Authenticated
      *
      * @return void
     */
-    public function deleteAction(){
+    public function deleteAction()
+    {
 
         if(ProjectModel::deleteProject($_GET['id'])){
             Flash::addMessage('project deleted successful');
@@ -150,7 +152,8 @@ class Project extends Authenticated
      *
      * @return void
     */
-    public function editAction(){
+    public function editAction()
+    {
         $proj = ProjectModel::getoneProject($_GET['id']);
         $projectImages = ProjectModel::getimagesProject($_GET['id']);
         $cat = ProjectModel::getcategories();
@@ -168,7 +171,8 @@ class Project extends Authenticated
      * @return void
     */
 
-    public function updateAction(){
+    public function updateAction()
+    {
         $proj = ProjectModel::getoneProject($_GET['id']);
         $projectImages = ProjectModel::getimagesProject($_GET['id']);
         $cat = ProjectModel::getcategories();
@@ -185,7 +189,8 @@ class Project extends Authenticated
      *
      * @return void
     */
-    public function updateProjectdataAction(){
+    public function updateProjectdataAction()
+    {
         $dataupdated = ProjectModel::updateData($_POST);
         if($dataupdated){
             echo json_encode(['code'=>200, 'msg'=>"project updated successfully"]);
@@ -196,5 +201,19 @@ class Project extends Authenticated
         
 
         
+    }
+
+    /**
+     * Display form for managing categories
+     *
+     * @return void
+    */
+    public function managecategoriesAction()
+    {
+        $cat = ProjectModel::getcategories();        
+        View::renderTemplate('Admin/managecategories.html', [
+            "categories" => $cat
+        ]);
+
     }
 }
