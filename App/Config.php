@@ -35,6 +35,23 @@ class Config
     const DB_PASSWORD = '';
 
     /**
+     * PHP mailer email
+     * @var string
+     */
+    const MAILER_EMAIL = '';
+
+    /**
+     * PHP mailer password
+     * @var string
+     */
+    const MAILER_PASS = '';
+    /**
+     * Reciver email
+     * @var string
+     */
+    const RECIVER_EMAIL = 'mouiguinasimo@gmail.com';
+
+    /**
      * Show or hide error messages on screen
      * @var boolean
      */

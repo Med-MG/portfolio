@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use App\Flash;
-
+use App\Sendemail;
 /**
  * Home controller
  *
@@ -31,10 +31,17 @@ class Contact extends \Core\Controller
     public function sendemailAction()
     {       
         if(!empty($_POST)){
-            
+            if(Sendemail::send($_POST)){
+                echo json_encode(["code" => 200, 'msg'=>"email sent successfully"]);
+            }else {
+                echo json_encode(["code" => 400, 'msg'=>"Try again later"]);
+
+            }
         }
-        echo json_encode(["code" => 200, 'msg'=>"email sent successfully"]);
+        
        
     }
+
+    
 
 }
