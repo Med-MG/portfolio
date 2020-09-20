@@ -1,0 +1,227 @@
+{% extends "adminbase.html" %}
+{% block icon %}pe-7s-graph{% endblock %}
+{% block title %}Managing services{% endblock %}
+{% block subtitle %} This section is for managing services {% endblock %}
+{% block innerbody %}
+    <div class="row justify-content-xl-center">
+        <div class="col-md-6">
+            <div class="main-card mb-2 card">
+                <div class="card-body">
+                    <h5 class="card-title">General Info</h5>
+
+                    <form method="POST" id="formEdit" enctype="multipart/form-data" class="needs-validation" novalidate="">
+                        <input type="text" id="ActionType" hidden value="add">
+                        <input type="text" id="service_id" hidden value="7">
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label for="service">Service Title</label>
+                                <input type="text" class="form-control" id="service" placeholder="service name"
+                                    name="service" required="" />
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label for="description">short description</label>
+                                <textarea name="description" id="description" class="form-control" required="" ></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <input class="btn btn-primary" id="submitService" type="submit" name="submitService">
+                    </form>
+
+                    <script>
+                        // Example starter JavaScript for disabling form submissions if there are invalid fields
+                        (function () {
+                            "use strict";
+                            window.addEventListener(
+                                "load",
+                                function () {
+                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                    var forms = document.getElementsByClassName("needs-validation");
+                                    // Loop over them and prevent submission
+                                    var validation = Array.prototype.filter.call(forms, function (
+                                        form
+                                    ) {
+                                        form.addEventListener(
+                                            "submit",
+                                            function (event) {
+                                                if (form.checkValidity() === false) {
+                                                    event.preventDefault();
+                                                    event.stopPropagation();
+                                                }
+                                                form.classList.add("was-validated");
+                                            },
+                                            false
+                                        );
+                                    });
+                                },
+                                false
+                            );
+                        })();
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">All Services</h5>
+                <table class="mb-0 table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Service Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in services %}
+                            <tr id="serviceDel{{service.id}}">
+                                <th scope="row">{{service.id}}</th>
+                                <td>{{service.name}}</td>
+                                <td>{{service.description}}</td>
+                                <td class="text-center">
+                                    
+                                    <button type="button" id="PopoverCustomT-2"
+                                        class=" btn-wide btn btn-success btn-icon-only">
+                                        <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
+                                    </button>
+                                    
+                                    <button type="button" id="PopoverCustomT-1"
+                                        class=" btn-icon btn-icon-only btn btn-outline-danger"
+                                        value="{{service.id}}" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        <i class="pe-7s-trash" style="font-size: 1rem;"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(function () {
+
+        const delete_buttons = document.querySelectorAll('#PopoverCustomT-1');
+        for (const el of delete_buttons) {
+            el.addEventListener('click', (e) => {
+                let link = e.currentTarget.value;
+                console.log(link);
+                document.querySelector('.deletion_link').href = link;
+                
+                $("#exampleModal > div > div > div.modal-footer > a > button").attr('data-dismiss','modal');
+            });
+        }
+        const edit_buttons = document.querySelectorAll('#PopoverCustomT-2');
+        for (const el of edit_buttons) {
+            el.addEventListener('click', (e) => {
+                let id   = e.currentTarget.parentNode.parentNode.children[0].innerText;
+                let service_name   = e.currentTarget.parentNode.parentNode.children[1].innerText;
+                let description   = e.currentTarget.parentNode.parentNode.children[2].innerText;
+                $("#ActionType").val("update");
+                $("#service_id").val(id);
+                $("#service").val(service_name);
+                $("#description").val(description);
+            });
+        }
+
+        /* delete an image using ajax */
+        $(".deletion_link").on("click", function (e) {
+            e.preventDefault();
+            var service_id = $(this).attr('href');
+            $.ajax({
+                type: "POST",
+                url: "/Services/deleteService",
+                dataType: "json",
+                data: {
+                    id: service_id
+                },
+                success: function (data) {
+                    if (data.code == "200") {
+                        toastr.success(data.msg);
+                        $("#serviceDel"+service_id).fadeOut();
+                    } else {
+                        toastr.error(data.msg);
+                    }
+
+                }
+
+            });
+        })
+        /* delete an image using ajax */
+        $("#submitService").on("click", function (e) {
+            e.preventDefault();
+            let url;
+            if($("#ActionType").val() == "update"){
+                url = "/Services/updateService"
+            }else{
+                url = "/Services/addService"
+            }
+            let params = {
+                service_title : $("#service").val(),
+                description : $("#description").val(),
+                service_id : $("#service_id").val()
+            }
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: "json",
+                data: params,
+                beforeSend: function () {
+                    console.log("Sending ...");
+                },
+                success: function (data) {
+                    if (data.code == "200") {
+                        toastr.success(data.msg);
+                        setTimeout(function(){ location.reload(); }, 500);
+                    } else {
+                        toastr.error(data.msg);
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    var msg = '';
+                    if (jqXHR.status === 0) {
+                        msg = 'Not connect.\n Verify Network.';
+                    } else if (jqXHR.status == 404) {
+                        msg = 'Requested page not found. [404]';
+                    } else if (jqXHR.status == 500) {
+                        msg = 'Internal Server Error [500].';
+                    } else if (exception === 'parsererror') {
+                        msg = 'Requested JSON parse failed.';
+                    } else if (exception === 'timeout') {
+                        msg = 'Time out error.';
+                    } else if (exception === 'abort') {
+                        msg = 'Ajax request aborted.';
+                    } else {
+                        msg = 'Uncaught Error.\n' + jqXHR.responseText;
+                    }
+                    console.log(msg);
+
+                },
+                complete: function () {
+                    console.log("Completed");
+                }
+
+
+            });
+
+
+
+
+        })
+    });
+</script>
+{% endblock %}

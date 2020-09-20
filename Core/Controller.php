@@ -103,4 +103,27 @@ abstract class Controller
             $this->redirect('/login');
         }
     }
+
+    /**
+     * This is a helper function for limiting the lenght of a string
+     * 
+     * 
+     *@param string
+     *@param integer
+     * @return string
+     */
+    public function strWordCut($string,$length,$end='....')
+    {
+        $string = strip_tags($string);
+    
+        if (strlen($string) > $length) {
+    
+            // truncate string
+            $stringCut = substr($string, 0, $length);
+    
+            // make sure it ends in a word so assassinate doesn't become ass...
+            $string = substr($stringCut, 0, strrpos($stringCut, ' ')).$end;
+        }
+        return $string;
+    }
 }
