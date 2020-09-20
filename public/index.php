@@ -33,7 +33,7 @@ $router = new Core\Router();
 
 //Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
-$router->add('dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
+$router->add('dashboard', ['controller' => 'Project', 'action' => 'manage']);
 $router->add('login', ['controller' => 'Login', 'action' => 'new']);
 $router->add('logout', ['controller' => 'Login', 'action' => 'destroy']);
 $router->add('portfolio', ['controller' => 'Portfolio', 'action' => 'show']);

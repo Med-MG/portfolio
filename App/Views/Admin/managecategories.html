@@ -11,6 +11,7 @@
 
                     <form method="POST" id="formEdit" enctype="multipart/form-data" class="needs-validation" novalidate="">
                         <input type="text" id="ActionType" hidden value="add">
+                        <input type="text" id="cat_id" hidden value="7">
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
                                 <label for="category">Category Title</label>
@@ -81,20 +82,20 @@
                     </thead>
                     <tbody>
                         {% for cat in categories %}
-                            <tr>
+                            <tr id="catDel{{cat.id}}">
                                 <th scope="row">{{cat.id}}</th>
                                 <td>{{cat.cat_name}}</td>
                                 <td>{{cat.slug}}</td>
                                 <td class="text-center">
-                                    <a href="/Project/editCategory?id={{cat.id}}">
-                                        <button type="button" id="PopoverCustomT-1"
-                                            class=" btn-wide btn btn-success btn-icon-only">
-                                            <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
-                                        </button>
-                                    </a>
+                                    
+                                    <button type="button" id="PopoverCustomT-2"
+                                        class=" btn-wide btn btn-success btn-icon-only">
+                                        <i class="pe-7s-note" style="font-size: 1rem;"></i> Edit
+                                    </button>
+                                    
                                     <button type="button" id="PopoverCustomT-1"
                                         class=" btn-icon btn-icon-only btn btn-outline-danger"
-                                        value="/Project/deleteCategory?id={{cat.id}}" data-toggle="modal"
+                                        value="{{cat.id}}" data-toggle="modal"
                                         data-target="#exampleModal">
                                         <i class="pe-7s-trash" style="font-size: 1rem;"></i>
                                     </button>
@@ -118,33 +119,40 @@
         for (const el of delete_buttons) {
             el.addEventListener('click', (e) => {
                 let link = e.currentTarget.value;
-                let filename = e.currentTarget.parentNode.parentNode.children[0].children[0].value;
-                console.log(filename);
+                console.log(link);
                 document.querySelector('.deletion_link').href = link;
-                $("#deletionBTN").attr('value', filename);
-                $("#exampleModal > div > div > div.modal-footer > a > button").attr('data-dismiss',
-                    'modal');
+                
+                $("#exampleModal > div > div > div.modal-footer > a > button").attr('data-dismiss','modal');
+            });
+        }
+        const edit_buttons = document.querySelectorAll('#PopoverCustomT-2');
+        for (const el of edit_buttons) {
+            el.addEventListener('click', (e) => {
+                let id   = e.currentTarget.parentNode.parentNode.children[0].innerText;
+                let cat_name   = e.currentTarget.parentNode.parentNode.children[1].innerText;
+                let slug   = e.currentTarget.parentNode.parentNode.children[2].innerText;
+                $("#ActionType").val("update");
+                $("#cat_id").val(id)
+                $("#category").val(cat_name) 
+                $("#slug").val(slug)
             });
         }
 
         /* delete an image using ajax */
         $(".deletion_link").on("click", function (e) {
             e.preventDefault();
-            console.log('clicked');
-            var imageId = $(this).attr('href');
-            var imageName = $("#deletionBTN").attr('value');
-
+            var cat_id = $(this).attr('href');
             $.ajax({
                 type: "POST",
-                url: "/Project/deleteProjectImage",
+                url: "/Project/deleteCategory",
                 dataType: "json",
                 data: {
-                    imageId: imageId,
-                    imageName: imageName
+                    id: cat_id
                 },
                 success: function (data) {
                     if (data.code == "200") {
                         toastr.success(data.msg);
+                        $("#catDel"+cat_id).fadeOut();
                     } else {
                         toastr.error(data.msg);
                     }
@@ -164,7 +172,8 @@
             }
             let params = {
                 cat_title : $("#category").val(),
-                cat_slug : $("#slug").val()
+                cat_slug : $("#slug").val(),
+                cat_id : $("#cat_id").val()
             }
 
             $.ajax({
@@ -209,6 +218,10 @@
 
 
             });
+
+
+
+
         })
     });
 </script>

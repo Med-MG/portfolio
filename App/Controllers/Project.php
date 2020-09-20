@@ -123,8 +123,8 @@ class Project extends Authenticated
     {
         $proj = ProjectModel::getProject();
         foreach ($proj as $key => $project) {
-            $proj[$key]->order_date = date("F jS, Y, g:i a", strtotime($project->order_date));
-            $proj[$key]->final_date = date("F jS, Y, g:i a", strtotime($project->final_date));
+            $proj[$key]->order_date = date("F jS, Y", strtotime($project->order_date));
+            $proj[$key]->final_date = date("F jS, Y", strtotime($project->final_date));
         }
         View::renderTemplate('Admin/manageproject.html', [
             "projects" => $proj
@@ -210,7 +210,12 @@ class Project extends Authenticated
     */
     public function managecategoriesAction()
     {
-        $cat = ProjectModel::getcategories();        
+        $cat = ProjectModel::getcategories(); 
+        foreach ($cat as $key => $value) {
+            if($cat[$key]->cat_name == 'uncategorized'){
+                unset($cat[$key]);
+            }
+        }
         View::renderTemplate('Admin/managecategories.html', [
             "categories" => $cat
         ]);
@@ -224,17 +229,53 @@ class Project extends Authenticated
     {
         if(!empty($_POST)){
             $addcat = ProjectModel::addCategory($_POST);        
-
         }else{
             echo json_encode(['code'=>400, 'msg'=>"No data sent"]);
-
         }
         if($addcat){
             echo json_encode(['code'=>200, 'msg'=>"category added successfully"]);
-
         }else{
             echo json_encode(['code'=>400, 'msg'=>"cannot add category due to an error"]);
-
         }
     }
+    /**
+     * Detele category
+     *
+     * @return void
+    */
+    public function deleteCategoryAction()
+    {
+        if(!empty($_POST)){
+            $deletecat = ProjectModel::delCategory($_POST);        
+        }else{
+            echo json_encode(['code'=>400, 'msg'=>"No data sent"]);
+        }
+
+        if($deletecat){
+            echo json_encode(['code'=>200, 'msg'=>"category Deleted successfully"]);
+        }else{
+            echo json_encode(['code'=>400, 'msg'=>"cannot delete category due to an error"]);
+        }
+    }
+    /**
+     * Update category data
+     *
+     * @return void
+    */
+    public function updateCategoryAction()
+    {
+        if(!empty($_POST)){
+            $updatecat = ProjectModel::updateCategorydata($_POST);        
+        }else{
+            echo json_encode(['code'=>400, 'msg'=>"No data sent"]);
+        }
+
+        if($updatecat){
+            echo json_encode(['code'=>200, 'msg'=>"category Updated successfully"]);
+        }else{
+            echo json_encode(['code'=>400, 'msg'=>"cannot update category due to an error"]);
+        }
+    }
+
+
 }

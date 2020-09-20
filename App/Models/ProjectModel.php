@@ -315,6 +315,57 @@ class ProjectModel extends \Core\Model
                         echo 'query failed' . $e->getMessage();
             }
     }
+    /**
+     * delete category from database
+     *
+     * @return bool return true if deleted false otherwise
+     */
+    public static function delCategory($data){
+        try {
+            $db = static::getDB();
+            $sql="UPDATE `project` SET `category` = '7' WHERE `project`.`category` = ?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$data['id']]);
+
+            $sql = "DELETE FROM `categories` WHERE `categories`.`id` = ?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$data['id']]);
+
+    
+            if($stmt->rowCount() > 0) {
+                return true;
+            }else{
+                return false;
+            }
+    
+            } catch (PDOException $e) {
+                        echo 'query failed' . $e->getMessage();
+            }
+    }
+    /**
+     * update category 
+     * 
+     * @return bool return categories table data
+     */
+    public static function updateCategorydata($data){
+        try {
+            $db = static::getDB();
+            $sql="UPDATE `categories` SET `cat_name` = ?, `slug` = ? WHERE `categories`.`id` = ?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$data['cat_title'], $data['cat_slug'], $data['cat_id']]);
+
+            if($stmt->rowCount() > 0) {
+                return true;
+            }else{
+                return false;
+            }
+    
+            } catch (PDOException $e) {
+                        echo 'query failed' . $e->getMessage();
+            }
+    }
+
+    
 
 }
 
