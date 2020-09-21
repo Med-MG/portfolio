@@ -178,4 +178,4 @@ $RECYCLE.BIN/
 #google api_client dependancy
 
 /vendor/
-./ngrok.exe
+ngrok.exe
